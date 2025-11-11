@@ -109,16 +109,6 @@ export default function MC3() {
             </div>
 
             <div className="mb-16">
-              <h2 className="text-3xl font-bold mb-6">Watch: MC3 Overview</h2>
-              <div className="max-w-4xl">
-                <YouTubeEmbed videoId="dQw4w9WgXcQ" title="MC3 Multi-Craft Core Curriculum Overview" />
-                <p className="text-sm text-muted-foreground mt-3">
-                  Learn what to expect from the Multi-Craft Core Curriculum training program
-                </p>
-              </div>
-            </div>
-
-            <div className="mb-16">
               <Card className="bg-primary text-primary-foreground">
                 <CardHeader>
                   <CardTitle className="text-3xl">Raising the Bar Program</CardTitle>
