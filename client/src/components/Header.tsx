@@ -42,9 +42,9 @@ export default function Header() {
           </nav>
 
           <div className="hidden md:block">
-            <Link href="/quiz">
-              <Button variant="default" size="default" data-testid="button-get-started">
-                Get Started
+            <Link href="/express-interest">
+              <Button variant="default" size="default" data-testid="button-express-interest">
+                Express Interest
               </Button>
             </Link>
           </div>
@@ -75,14 +75,14 @@ export default function Header() {
                   </Button>
                 </Link>
               ))}
-              <Link href="/quiz">
+              <Link href="/express-interest">
                 <Button
                   variant="default"
                   className="w-full mt-2"
                   onClick={() => setMobileMenuOpen(false)}
-                  data-testid="mobile-button-get-started"
+                  data-testid="mobile-button-express-interest"
                 >
-                  Get Started
+                  Express Interest
                 </Button>
               </Link>
             </nav>

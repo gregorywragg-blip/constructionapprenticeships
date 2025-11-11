@@ -10,6 +10,7 @@ import Resources from "@/pages/Resources";
 import MC3 from "@/pages/MC3";
 import Math from "@/pages/Math";
 import RaisingTheBar from "@/pages/RaisingTheBar";
+import ExpressInterest from "@/pages/ExpressInterest";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -22,6 +23,7 @@ function Router() {
       <Route path="/mc3" component={MC3} />
       <Route path="/math" component={Math} />
       <Route path="/raising-the-bar" component={RaisingTheBar} />
+      <Route path="/express-interest" component={ExpressInterest} />
       <Route component={NotFound} />
     </Switch>
   );
