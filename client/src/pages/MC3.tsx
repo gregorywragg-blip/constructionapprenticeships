@@ -1,5 +1,7 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
+import DrugTestingDisclaimer from "@/components/DrugTestingDisclaimer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -107,6 +109,16 @@ export default function MC3() {
             </div>
 
             <div className="mb-16">
+              <h2 className="text-3xl font-bold mb-6">Watch: MC3 Overview</h2>
+              <div className="max-w-4xl">
+                <YouTubeEmbed videoId="dQw4w9WgXcQ" title="MC3 Multi-Craft Core Curriculum Overview" />
+                <p className="text-sm text-muted-foreground mt-3">
+                  Learn what to expect from the Multi-Craft Core Curriculum training program
+                </p>
+              </div>
+            </div>
+
+            <div className="mb-16">
               <Card className="bg-primary text-primary-foreground">
                 <CardHeader>
                   <CardTitle className="text-3xl">Raising the Bar Program</CardTitle>
@@ -114,7 +126,10 @@ export default function MC3() {
                     CTWI's flagship pre-apprenticeship cohort in DC & Maryland
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-4">
+                <CardContent className="space-y-6">
+                  <div className="bg-white/10 rounded-lg p-1">
+                    <YouTubeEmbed videoId="_Kt9esc4hLs" title="Raising the Bar Pre-Apprenticeship Program" />
+                  </div>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div className="flex items-start gap-3">
                       <Briefcase className="h-5 w-5 shrink-0 mt-1" />
@@ -157,6 +172,10 @@ export default function MC3() {
                   </div>
                 </CardContent>
               </Card>
+            </div>
+
+            <div className="mb-16">
+              <DrugTestingDisclaimer />
             </div>
 
             <div>

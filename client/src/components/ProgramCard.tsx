@@ -13,6 +13,7 @@ export interface ProgramCardProps {
   phone?: string;
   email?: string;
   website?: string;
+  videoId?: string;
 }
 
 export default function ProgramCard({

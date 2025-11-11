@@ -3,6 +3,10 @@ import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import ProgramCard from "@/components/ProgramCard";
 import SearchFilter from "@/components/SearchFilter";
+import DrugTestingDisclaimer from "@/components/DrugTestingDisclaimer";
+import YouTubeEmbed from "@/components/YouTubeEmbed";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
 
 export default function Programs() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -27,6 +31,7 @@ export default function Programs() {
       phone: "(301) 725-2400",
       email: "info@ibew26.org",
       website: "https://dcpscareerready.org/opportunities/ibew-local-union-26-electrical-apprenticeship-program/",
+      videoId: "7mf4h7zB6Lg",
     },
     {
       id: "2",
@@ -37,6 +42,7 @@ export default function Programs() {
       nextDeadline: "Ongoing",
       phone: "(301) 725-2400",
       website: "https://www.dclabor.org/apprenticeships",
+      videoId: "KbkNul4wQH0",
     },
     {
       id: "3",
@@ -46,6 +52,7 @@ export default function Programs() {
       location: "Lanham, MD",
       phone: "(202) 726-8820",
       website: "https://www.dclabor.org/apprenticeships",
+      videoId: "nPRHgKGvKU8",
     },
     {
       id: "4",
@@ -55,6 +62,7 @@ export default function Programs() {
       location: "DC/MD",
       nextDeadline: "Rolling",
       website: "https://www.dclabor.org/apprenticeships",
+      videoId: "z5LgZ-qy2bU",
     },
     {
       id: "5",
@@ -64,6 +72,7 @@ export default function Programs() {
       location: "DC/MD",
       nextDeadline: "Year-round",
       website: "https://www.dclabor.org/apprenticeships",
+      videoId: "XiwRE77Y0zY",
     },
     {
       id: "6",
@@ -72,6 +81,7 @@ export default function Programs() {
       description: "Construction boilermaker training program for heavy industrial construction.",
       location: "DC/MD",
       website: "https://www.dclabor.org/apprenticeships",
+      videoId: "oHg5SJYRHA0",
     },
   ];
 
@@ -122,13 +132,35 @@ export default function Programs() {
             />
           </div>
 
+          <div className="mb-8">
+            <DrugTestingDisclaimer />
+          </div>
+
           <div className="mb-4 text-sm text-muted-foreground">
             Showing {filteredPrograms.length} of {programs.length} programs
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredPrograms.map(program => (
-              <ProgramCard key={program.id} {...program} />
+              <div key={program.id} className="space-y-4">
+                <ProgramCard {...program} />
+                {program.videoId && (
+                  <Dialog>
+                    <DialogTrigger asChild>
+                      <Button variant="outline" className="w-full" data-testid={`button-watch-video-${program.id}`}>
+                        Watch Program Video
+                      </Button>
+                    </DialogTrigger>
+                    <DialogContent className="max-w-3xl">
+                      <DialogHeader>
+                        <DialogTitle>{program.name}</DialogTitle>
+                        <DialogDescription>Learn more about this apprenticeship program</DialogDescription>
+                      </DialogHeader>
+                      <YouTubeEmbed videoId={program.videoId} title={program.name} />
+                    </DialogContent>
+                  </Dialog>
+                )}
+              </div>
             ))}
           </div>
 
