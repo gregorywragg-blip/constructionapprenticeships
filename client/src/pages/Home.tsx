@@ -11,7 +11,7 @@ export default function Home() {
   const features = [
     {
       icon: Building2,
-      title: "15+ Apprenticeship Programs",
+      title: "14 Union Apprenticeship Programs",
       description: "Searchable database of union construction programs across DC & Maryland",
       link: "/programs",
     },

@@ -4,7 +4,7 @@
 
 This is a web application designed to help individuals in the DC and Maryland area find construction apprenticeship opportunities and access support services. The platform serves as a comprehensive resource hub featuring:
 
-- **Apprenticeship Program Directory**: A searchable database of 15+ union construction programs across various trades (electrical, carpentry, plumbing, etc.)
+- **Apprenticeship Program Directory**: A searchable database of 14 union construction programs across various trades (electrical, carpentry, plumbing, etc.)
 - **Career Matching Quiz**: An AI-powered questionnaire to match users with appropriate apprenticeship programs based on their skills, interests, and preferences
 - **Support Resources**: Directory of social services including housing assistance, food programs, drug/alcohol treatment, transportation, childcare, and healthcare
 - **Math Practice Center**: Interactive construction math practice with 50+ questions covering fractions, decimals, measurements, and geometry
