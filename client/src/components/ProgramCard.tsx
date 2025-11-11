@@ -1,7 +1,7 @@
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { MapPin, Calendar, Phone, Mail } from "lucide-react";
+import { MapPin, Calendar, Phone, Mail, ExternalLink } from "lucide-react";
 
 export interface ProgramCardProps {
   id: string;
@@ -62,6 +62,20 @@ export default function ProgramCard({
           <div className="flex items-center gap-2 text-sm" data-testid={`text-email-${id}`}>
             <Mail className="h-4 w-4 text-muted-foreground" />
             <span className="text-foreground">{email}</span>
+          </div>
+        )}
+        {website && (
+          <div className="flex items-center gap-2 text-sm" data-testid={`text-website-${id}`}>
+            <ExternalLink className="h-4 w-4 text-muted-foreground" />
+            <a 
+              href={website} 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="text-primary hover:underline"
+              data-testid={`link-website-${id}`}
+            >
+              View Program Details
+            </a>
           </div>
         )}
       </CardContent>
