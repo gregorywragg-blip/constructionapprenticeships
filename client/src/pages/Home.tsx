@@ -13,31 +13,37 @@ export default function Home() {
       icon: Building2,
       title: "15+ Apprenticeship Programs",
       description: "Searchable database of union construction programs across DC & Maryland",
+      link: "/programs",
     },
     {
       icon: Users,
       title: "AI Career Matching",
       description: "Take our quiz to find the perfect apprenticeship based on your skills and interests",
+      link: "/quiz",
     },
     {
       icon: HeartHandshake,
       title: "Support Resources",
       description: "Access housing, rehab, food assistance, and other services to help you succeed",
+      link: "/resources",
     },
     {
       icon: Calculator,
       title: "Math Practice Center",
       description: "Master construction math with 50+ interactive questions and tutorials",
+      link: "/math",
     },
     {
       icon: GraduationCap,
       title: "MC3 Training Info",
       description: "Learn about the Multi-Craft Core Curriculum pre-apprenticeship program",
+      link: "/mc3",
     },
     {
       icon: TrendingUp,
       title: "Raising the Bar",
       description: "Free pre-apprenticeship cohort with hands-on training and union introductions",
+      link: "/mc3",
     },
   ];
 
@@ -58,15 +64,17 @@ export default function Home() {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {features.map((feature, index) => (
-                <Card key={index} className="hover-elevate" data-testid={`card-feature-${index}`}>
-                  <CardHeader className="gap-3">
-                    <div className="w-12 h-12 bg-primary/10 rounded-md flex items-center justify-center">
-                      <feature.icon className="h-6 w-6 text-primary" />
-                    </div>
-                    <CardTitle className="text-xl">{feature.title}</CardTitle>
-                    <CardDescription>{feature.description}</CardDescription>
-                  </CardHeader>
-                </Card>
+                <Link key={index} href={feature.link}>
+                  <Card className="hover-elevate active-elevate-2 cursor-pointer h-full" data-testid={`card-feature-${index}`}>
+                    <CardHeader className="gap-3">
+                      <div className="w-12 h-12 bg-primary/10 rounded-md flex items-center justify-center">
+                        <feature.icon className="h-6 w-6 text-primary" />
+                      </div>
+                      <CardTitle className="text-xl">{feature.title}</CardTitle>
+                      <CardDescription>{feature.description}</CardDescription>
+                    </CardHeader>
+                  </Card>
+                </Link>
               ))}
             </div>
           </div>
