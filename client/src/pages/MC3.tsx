@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 export default function MC3() {
   const benefits = [
     { icon: DollarSign, title: "Tuition-Free", description: "Zero cost to participants - fully funded" },
-    { icon: Clock, title: "120-160 Hours", description: "Typically 10 weeks of comprehensive training" },
+    { icon: Clock, title: "120-160 Hours", description: "Typically 6 weeks of comprehensive training" },
     { icon: Award, title: "Certifications", description: "OSHA 10, CPR/First Aid, MC3 Certificate" },
     { icon: Users, title: "80% Placement", description: "Direct pathway to union apprenticeships" },
   ];
@@ -118,7 +118,7 @@ export default function MC3() {
                 </CardHeader>
                 <CardContent>
                   <p className="mb-4 opacity-90">
-                    Raising the Bar is a free 10-week cohort program that uses the MC3 curriculum along with hands-on training, jobsite tours, and direct union introductions.
+                    Raising the Bar is a free 6-week cohort program that uses the MC3 curriculum along with hands-on training, jobsite tours, and direct union introductions.
                   </p>
                   <Link href="/raising-the-bar">
                     <Button variant="secondary" size="lg" data-testid="button-view-rtb">

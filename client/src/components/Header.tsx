@@ -22,9 +22,9 @@ export default function Header() {
         <div className="flex items-center justify-between h-16">
           <Link href="/" className="flex items-center gap-2 hover-elevate active-elevate-2 px-2 py-1 rounded-md -ml-2" data-testid="link-home">
             <div className="w-8 h-8 bg-primary rounded-md flex items-center justify-center">
-              <span className="text-primary-foreground font-bold text-sm">RTB</span>
+              <span className="text-primary-foreground font-bold text-sm">DC</span>
             </div>
-            <span className="font-bold text-lg">Raising the Bar</span>
+            <span className="font-bold text-lg">DC MD Apprenticeship Finder</span>
           </Link>
 
           <nav className="hidden md:flex items-center gap-1">

@@ -15,7 +15,7 @@ export default function RaisingTheBar() {
     },
     {
       icon: Clock,
-      title: "10-Week Program",
+      title: "6-Week Program",
       description: "Comprehensive training including MC3 curriculum"
     },
     {
@@ -154,30 +154,6 @@ export default function RaisingTheBar() {
                 </div>
               </CardContent>
             </Card>
-          </div>
-        </section>
-
-        <section className="py-16 bg-card">
-          <div className="max-w-4xl mx-auto px-6 text-center">
-            <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-            <p className="text-xl text-muted-foreground mb-8">
-              Call 2-1-1 to learn about upcoming Raising the Bar cohorts in your area
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button
-                variant="default"
-                size="lg"
-                onClick={() => window.location.href = "tel:211"}
-                data-testid="button-call-211"
-              >
-                Call 2-1-1
-              </Button>
-              <Link href="/resources">
-                <Button variant="outline" size="lg" data-testid="button-view-resources">
-                  View Support Resources
-                </Button>
-              </Link>
-            </div>
           </div>
         </section>
       </main>
