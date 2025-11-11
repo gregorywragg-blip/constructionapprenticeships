@@ -43,7 +43,7 @@ export default function Home() {
       icon: TrendingUp,
       title: "Raising the Bar",
       description: "Free pre-apprenticeship cohort with hands-on training and union introductions",
-      link: "/mc3",
+      link: "/raising-the-bar",
     },
   ];
 
@@ -114,9 +114,9 @@ export default function Home() {
                     <span>OSHA 10 certification and direct union introductions</span>
                   </li>
                 </ul>
-                <Link href="/mc3">
-                  <Button variant="default" size="lg" data-testid="button-learn-mc3">
-                    Learn About MC3
+                <Link href="/raising-the-bar">
+                  <Button variant="default" size="lg" data-testid="button-learn-rtb">
+                    Learn More About Raising the Bar
                   </Button>
                 </Link>
               </div>

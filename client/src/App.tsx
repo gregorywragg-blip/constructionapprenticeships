@@ -9,6 +9,7 @@ import Quiz from "@/pages/Quiz";
 import Resources from "@/pages/Resources";
 import MC3 from "@/pages/MC3";
 import Math from "@/pages/Math";
+import RaisingTheBar from "@/pages/RaisingTheBar";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -20,6 +21,7 @@ function Router() {
       <Route path="/resources" component={Resources} />
       <Route path="/mc3" component={MC3} />
       <Route path="/math" component={Math} />
+      <Route path="/raising-the-bar" component={RaisingTheBar} />
       <Route component={NotFound} />
     </Switch>
   );

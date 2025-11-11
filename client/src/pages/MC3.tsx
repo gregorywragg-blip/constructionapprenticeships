@@ -1,12 +1,12 @@
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
-import YouTubeEmbed from "@/components/YouTubeEmbed";
 import DrugTestingDisclaimer from "@/components/DrugTestingDisclaimer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { CheckCircle2, Clock, Award, DollarSign, Users, Briefcase } from "lucide-react";
+import { CheckCircle2, Clock, Award, DollarSign, Users } from "lucide-react";
 import mc3Image from "@assets/generated_images/MC3_training_classroom_session_b1a684c4.png";
+import { Link } from "wouter";
+import { Button } from "@/components/ui/button";
 
 export default function MC3() {
   const benefits = [
@@ -111,55 +111,20 @@ export default function MC3() {
             <div className="mb-16">
               <Card className="bg-primary text-primary-foreground">
                 <CardHeader>
-                  <CardTitle className="text-3xl">Raising the Bar Program</CardTitle>
-                  <CardDescription className="text-primary-foreground/90 text-lg">
-                    CTWI's flagship pre-apprenticeship cohort in DC & Maryland
+                  <CardTitle className="text-2xl">Looking for Raising the Bar?</CardTitle>
+                  <CardDescription className="text-primary-foreground/90">
+                    CTWI's flagship pre-apprenticeship program using MC3 curriculum
                   </CardDescription>
                 </CardHeader>
-                <CardContent className="space-y-6">
-                  <div className="bg-white/10 rounded-lg p-1">
-                    <YouTubeEmbed videoId="_Kt9esc4hLs" title="Raising the Bar Pre-Apprenticeship Program" />
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    <div className="flex items-start gap-3">
-                      <Briefcase className="h-5 w-5 shrink-0 mt-1" />
-                      <div>
-                        <p className="font-medium mb-1">Hands-On Skills Training</p>
-                        <p className="text-sm opacity-90">Practical experience with tools and techniques</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Users className="h-5 w-5 shrink-0 mt-1" />
-                      <div>
-                        <p className="font-medium mb-1">Jobsite Tours</p>
-                        <p className="text-sm opacity-90">Visit active construction sites and meet professionals</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <CheckCircle2 className="h-5 w-5 shrink-0 mt-1" />
-                      <div>
-                        <p className="font-medium mb-1">Interview Preparation</p>
-                        <p className="text-sm opacity-90">Get ready for apprenticeship interviews</p>
-                      </div>
-                    </div>
-                    <div className="flex items-start gap-3">
-                      <Award className="h-5 w-5 shrink-0 mt-1" />
-                      <div>
-                        <p className="font-medium mb-1">Direct Union Introductions</p>
-                        <p className="text-sm opacity-90">Meet union representatives and contractors</p>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="pt-4">
-                    <Button
-                      variant="secondary"
-                      size="lg"
-                      onClick={() => window.location.href = "tel:211"}
-                      data-testid="button-contact-rtb"
-                    >
-                      Contact Raising the Bar Program
+                <CardContent>
+                  <p className="mb-4 opacity-90">
+                    Raising the Bar is a free 10-week cohort program that uses the MC3 curriculum along with hands-on training, jobsite tours, and direct union introductions.
+                  </p>
+                  <Link href="/raising-the-bar">
+                    <Button variant="secondary" size="lg" data-testid="button-view-rtb">
+                      Learn About Raising the Bar
                     </Button>
-                  </div>
+                  </Link>
                 </CardContent>
               </Card>
             </div>
