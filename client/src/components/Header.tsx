@@ -14,6 +14,7 @@ export default function Header() {
     { href: "/resources", label: "Resources" },
     { href: "/mc3", label: "MC3 Info" },
     { href: "/math", label: "Math Practice" },
+    { href: "/bf-dc", label: "BF-DC" },
   ];
 
   return (
