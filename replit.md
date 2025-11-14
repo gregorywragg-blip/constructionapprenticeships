@@ -23,6 +23,7 @@ Preferred communication style: Simple, everyday language.
 **Branding:**
 - Site name: "The DC/MD Union Trades Pathway"
 - Logo: CTWI (Construction Trades Workforce Initiative) logo
+- Color scheme: Burgundy/maroon (hue 350, saturation 65%) matching CTWI.org branding
 - Focus: Union construction apprenticeships in DC & Maryland
 
 ## System Architecture
@@ -47,6 +48,7 @@ Preferred communication style: Simple, everyday language.
 **Styling Strategy**:
 - Tailwind CSS with CSS variables for theming
 - Custom design tokens defined in `index.css` for light/dark mode support
+- Burgundy color scheme (hue 350, saturation 65%, lightness 35-40%) matching CTWI branding
 - Spacing uses standardized units (4, 6, 8, 12, 16, 20, 24px) for consistency
 - **Pros**: Utility-first approach speeds development; design tokens enable theme flexibility
 - **Cons**: Requires learning Tailwind conventions; can lead to verbose className strings
