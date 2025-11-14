@@ -7,6 +7,7 @@ import Home from "@/pages/Home";
 import Programs from "@/pages/Programs";
 import Quiz from "@/pages/Quiz";
 import Resources from "@/pages/Resources";
+import ResourcesGuides from "@/pages/ResourcesGuides";
 import MC3 from "@/pages/MC3";
 import Math from "@/pages/Math";
 import RaisingTheBar from "@/pages/RaisingTheBar";
@@ -21,6 +22,7 @@ function Router() {
       <Route path="/programs" component={Programs} />
       <Route path="/quiz" component={Quiz} />
       <Route path="/resources" component={Resources} />
+      <Route path="/resources-guides" component={ResourcesGuides} />
       <Route path="/mc3" component={MC3} />
       <Route path="/math" component={Math} />
       <Route path="/raising-the-bar" component={RaisingTheBar} />
