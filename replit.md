@@ -1,8 +1,8 @@
-# DC/Maryland Construction Apprenticeship Platform
+# The DC/MD Union Trades Pathway
 
 ## Overview
 
-This is a web application designed to help individuals in the DC and Maryland area find construction apprenticeship opportunities and access support services. The platform serves as a comprehensive resource hub featuring:
+This is a web application designed to help individuals in the DC and Maryland area find union construction apprenticeship opportunities and access support services. The platform serves as a comprehensive resource hub featuring:
 
 - **Apprenticeship Program Directory**: A searchable database of 14 union construction programs across various trades (electrical, carpentry, plumbing, etc.)
 - **BF-DC Apprenticeship Programs**: Comprehensive directory of 15 union programs from the DC Apprenticeship Program Grid with verified contact information and website links
@@ -19,6 +19,11 @@ The application targets individuals seeking career opportunities in construction
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.
+
+**Branding:**
+- Site name: "The DC/MD Union Trades Pathway"
+- Logo: CTWI (Construction Trades Workforce Initiative) logo
+- Focus: Union construction apprenticeships in DC & Maryland
 
 ## System Architecture
 
