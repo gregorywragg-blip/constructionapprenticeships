@@ -24,6 +24,7 @@ Preferred communication style: Simple, everyday language.
 - Site name: "The DC/MD Union Trades Pathway"
 - Logo: CTWI (Construction Trades Workforce Initiative) logo
 - Color scheme: Burgundy/maroon (hue 350, saturation 65%) matching CTWI.org branding
+- Header: Dark burgundy background with white text (matching CTWI.org header)
 - Focus: Union construction apprenticeships in DC & Maryland
 
 ## System Architecture
