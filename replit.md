@@ -5,11 +5,14 @@
 This is a web application designed to help individuals in the DC and Maryland area find construction apprenticeship opportunities and access support services. The platform serves as a comprehensive resource hub featuring:
 
 - **Apprenticeship Program Directory**: A searchable database of 14 union construction programs across various trades (electrical, carpentry, plumbing, etc.)
+- **BF-DC Apprenticeship Programs**: Comprehensive directory of 15 union programs from the DC Apprenticeship Program Grid with verified contact information and website links
 - **Career Matching Quiz**: An AI-powered questionnaire to match users with appropriate apprenticeship programs based on their skills, interests, and preferences
 - **Support Resources**: Directory of social services including housing assistance, food programs, drug/alcohol treatment, transportation, childcare, and healthcare
+- **Resources & Guides**: Curated library of educational PDFs and guides for students, parents, and educators from TradesFutures and NABTU
 - **Math Practice Center**: Interactive construction math practice with 50+ questions covering fractions, decimals, measurements, and geometry
 - **MC3 Training Information**: Details about the Multi-Craft Core Curriculum pre-apprenticeship program
-- **Raising the Bar Program**: Information about a free pre-apprenticeship cohort with hands-on training
+- **Raising the Bar Program**: Information about a free 6-week pre-apprenticeship cohort with hands-on training
+- **Express Interest Form**: Embedded Google Form for users to express interest in apprenticeship programs
 
 The application targets individuals seeking career opportunities in construction trades, emphasizing accessibility, clarity, and professional credibility to build trust with users who may be navigating challenging life circumstances.
 
@@ -45,11 +48,15 @@ Preferred communication style: Simple, everyday language.
 
 **Key Pages**:
 - Home (`/`): Hero section with feature cards
-- Programs (`/programs`): Filterable/searchable apprenticeship listings
+- Raising the Bar (`/raising-the-bar`): 6-week pre-apprenticeship program information
+- Programs (`/programs`): Filterable/searchable apprenticeship listings (14 union programs)
 - Quiz (`/quiz`): Multi-step career matching questionnaire
-- Resources (`/resources`): Social services directory with needs assessment
+- Support Services (`/resources`): Social services directory with needs assessment
+- Resources & Guides (`/resources-guides`): Educational PDF library for students, parents, and educators
 - MC3 (`/mc3`): Pre-apprenticeship program information
 - Math (`/math`): Interactive math practice questions
+- BF-DC (`/bf-dc`): Comprehensive directory of 15 DC-area union apprenticeship programs
+- Express Interest (`/express-interest`): Embedded Google Form for program inquiries
 
 ### Backend Architecture
 
