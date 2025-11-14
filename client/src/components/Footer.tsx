@@ -6,9 +6,9 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           <div>
-            <h3 className="font-bold text-lg mb-4">Raising the Bar</h3>
+            <h3 className="font-bold text-lg mb-4">The DC/MD Union Trades Pathway</h3>
             <p className="text-sm text-muted-foreground">
-              Building careers in construction through apprenticeship programs in the DC & Maryland area.
+              Building careers in construction through union apprenticeship programs in the DC & Maryland area.
             </p>
           </div>
 
@@ -17,7 +17,7 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/programs" className="text-muted-foreground hover:text-foreground">
-                  Apprenticeship Programs
+                  Apprenticeships
                 </Link>
               </li>
               <li>
@@ -43,7 +43,12 @@ export default function Footer() {
             <ul className="space-y-2 text-sm">
               <li>
                 <Link href="/resources" className="text-muted-foreground hover:text-foreground">
-                  Support Services
+                  Supportive Services
+                </Link>
+              </li>
+              <li>
+                <Link href="/resources-guides" className="text-muted-foreground hover:text-foreground">
+                  Resources & Guides
                 </Link>
               </li>
               <li>
@@ -71,7 +76,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {new Date().getFullYear()} Raising the Bar. Supporting Construction Apprenticeships in DC & Maryland.</p>
+          <p>&copy; {new Date().getFullYear()} The DC/MD Union Trades Pathway. Supporting Union Construction Apprenticeships in DC & Maryland.</p>
         </div>
       </div>
     </footer>
