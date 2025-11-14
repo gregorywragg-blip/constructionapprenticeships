@@ -22,19 +22,19 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-50 bg-background border-b border-border">
       <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          <Link href="/" className="flex items-center gap-3 hover-elevate active-elevate-2 px-2 py-1 rounded-md -ml-2" data-testid="link-home">
+        <div className="flex items-center justify-between min-h-16 py-2">
+          <Link href="/" className="flex items-center gap-3 hover-elevate active-elevate-2 px-2 py-1 rounded-md -ml-2 flex-shrink-0" data-testid="link-home">
             <img src={ctwLogoUrl} alt="CTWI Logo" className="h-8 w-auto" />
-            <span className="font-bold text-base">The DC/MD Union Trades Pathway</span>
+            <span className="font-bold text-sm leading-tight max-w-[180px]">The DC/MD Union Trades Pathway</span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-1">
+          <nav className="hidden lg:flex items-center gap-1 flex-wrap justify-end max-w-2xl">
             {navLinks.map((link) => (
               <Link key={link.href} href={link.href}>
                 <Button
                   variant={location === link.href ? "secondary" : "ghost"}
                   size="sm"
-                  className="text-sm"
+                  className="text-sm h-auto py-2 px-3 whitespace-normal text-center leading-tight min-h-[36px]"
                   data-testid={`link-${link.label.toLowerCase().replace(/ /g, "-")}`}
                 >
                   {link.label}
@@ -43,9 +43,9 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden md:block">
+          <div className="hidden lg:block flex-shrink-0 ml-2">
             <Link href="/express-interest">
-              <Button variant="default" size="sm" className="text-sm" data-testid="button-express-interest">
+              <Button variant="default" size="sm" className="text-sm h-auto py-2 px-4" data-testid="button-express-interest">
                 Express Interest
               </Button>
             </Link>
@@ -54,7 +54,7 @@ export default function Header() {
           <Button
             variant="ghost"
             size="icon"
-            className="md:hidden"
+            className="lg:hidden flex-shrink-0"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             data-testid="button-mobile-menu"
           >
@@ -63,7 +63,7 @@ export default function Header() {
         </div>
 
         {mobileMenuOpen && (
-          <div className="md:hidden py-4 border-t border-border">
+          <div className="lg:hidden py-4 border-t border-border">
             <nav className="flex flex-col gap-2">
               {navLinks.map((link) => (
                 <Link key={link.href} href={link.href}>
