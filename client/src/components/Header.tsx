@@ -23,9 +23,10 @@ export default function Header() {
     <header className="sticky top-0 z-50 bg-primary border-b border-primary-foreground/10">
       <div className="max-w-7xl mx-auto px-6">
         <div className="flex items-center justify-between min-h-16 py-2 gap-4">
-          <Link href="/" className="flex items-center gap-3 hover-elevate active-elevate-2 px-2 py-1 rounded-md -ml-2 flex-shrink-0" data-testid="link-home">
-            <img src={ctwLogoUrl} alt="CTWI Logo" className="h-8 w-auto" />
-            <span className="font-bold text-sm leading-tight max-w-[180px] text-primary-foreground">The DC/MD Union Trades Pathway</span>
+          <Link href="/" className="flex items-center gap-3 hover-elevate active-elevate-2 px-2 py-1 rounded-md -ml-2 min-w-0" data-testid="link-home">
+            <img src={ctwLogoUrl} alt="CTWI Logo" className="h-8 w-auto flex-shrink-0" />
+            <span className="font-bold text-sm whitespace-nowrap text-primary-foreground hidden md:inline">DC/MD Union Trades Pathway</span>
+            <span className="font-bold text-sm text-primary-foreground md:hidden leading-tight">DC/MD Union Trades Pathway</span>
           </Link>
 
           <nav className="hidden lg:flex items-center gap-1 flex-wrap justify-center flex-1 max-w-2xl">
@@ -34,7 +35,7 @@ export default function Header() {
                 <Button
                   variant={location === link.href ? "secondary" : "ghost"}
                   size="sm"
-                  className="text-sm h-auto py-2 px-3 whitespace-normal text-center leading-tight min-h-[36px] text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground data-[active=true]:bg-primary-foreground/20"
+                  className="text-base h-auto py-2 px-3 whitespace-normal text-center leading-tight min-h-[38px] !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground data-[active=true]:bg-primary-foreground/20"
                   data-testid={`link-${link.label.toLowerCase().replace(/ /g, "-")}`}
                 >
                   {link.label}
@@ -45,7 +46,7 @@ export default function Header() {
 
           <div className="hidden lg:block flex-shrink-0">
             <Link href="/express-interest">
-              <Button variant="outline" size="sm" className="text-sm h-auto py-2 px-4 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10" data-testid="button-express-interest">
+              <Button variant="outline" size="sm" className="text-base h-auto py-2 px-4 border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground" data-testid="button-express-interest">
                 Express Interest
               </Button>
             </Link>
@@ -69,7 +70,7 @@ export default function Header() {
                 <Link key={link.href} href={link.href}>
                   <Button
                     variant={location === link.href ? "secondary" : "ghost"}
-                    className="w-full justify-start text-sm text-primary-foreground hover:bg-primary-foreground/10"
+                    className="w-full justify-start text-sm !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground"
                     size="sm"
                     onClick={() => setMobileMenuOpen(false)}
                     data-testid={`mobile-link-${link.label.toLowerCase().replace(/ /g, "-")}`}
@@ -82,7 +83,7 @@ export default function Header() {
                 <Button
                   variant="outline"
                   size="sm"
-                  className="w-full mt-2 text-sm border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10"
+                  className="w-full mt-2 text-sm border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground"
                   onClick={() => setMobileMenuOpen(false)}
                   data-testid="mobile-button-express-interest"
                 >
