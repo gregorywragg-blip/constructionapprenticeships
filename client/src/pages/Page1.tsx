@@ -3,11 +3,13 @@ import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
 import { FileText, ArrowLeft } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { usePageLogger } from "@/hooks/use-page-logger";
 import { useEffect } from "react";
 
 export default function Page1() {
   const [, setLocation] = useLocation();
   const { status } = useAuth();
+  usePageLogger('/page1', 'Visited page 1');
 
   useEffect(() => {
     if (status === 'unauthenticated' || status === 'error') {

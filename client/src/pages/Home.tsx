@@ -6,10 +6,12 @@ import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
 import { GraduationCap, Users, Calculator, HeartHandshake, Building2, TrendingUp, FileText, Shield } from "lucide-react";
 import { useAuth } from "@/contexts/AuthContext";
+import { usePageLogger } from "@/hooks/use-page-logger";
 import mc3Image from "@assets/generated_images/MC3_training_classroom_session_b1a684c4.png";
 
 export default function Home() {
   const { auth, isAuthenticated } = useAuth();
+  usePageLogger('/', 'Visited main site');
   const features = [
     {
       icon: Building2,
