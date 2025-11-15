@@ -192,6 +192,36 @@ Preferred communication style: Simple, everyday language.
 - Current: Hardcoded credentials
 - Future: Database-backed user model with bcrypt password hashing
 
+### Activity Logging
+
+**Implementation Date**: November 15, 2025
+
+**CSV Logging** (`server/utils/csvLogger.ts`):
+- Logs user activity to local CSV file: `activity_log.csv`
+- CSV format complies with RFC 4180 using `csv-stringify` library
+- Proper escaping of quotes, commas, and newlines in data fields
+- Header row: `['timestamp', 'username', 'page', 'details']`
+- Automatically creates file with header on first write
+- Function: `logToCSV(username: string, page: string, details: string)`
+
+**Current Logging Events:**
+- User login: Logged after successful authentication in `/api/login` route
+  - Example: `2025-11-15T06:42:58.375Z,beli,login,User logged in successfully`
+
+**CSV File Location:**
+- Development: Project root directory (`activity_log.csv`)
+- Note: File location can be configured via environment variable if needed for production deployments
+
+**Data Integrity:**
+- RFC 4180-compliant CSV formatting prevents corruption from special characters
+- Timestamps in ISO 8601 format for consistent parsing
+- Append-only design ensures chronological log ordering
+
+**Future Enhancements:**
+- Additional event types (logout, page views, resource access)
+- Log rotation for long-running deployments
+- Configurable log file path via environment variable
+
 ### External Dependencies
 
 **UI Component Libraries**:
