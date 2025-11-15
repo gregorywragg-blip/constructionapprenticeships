@@ -41,6 +41,7 @@ export default function Header() {
     { href: "/math", label: "Math Practice" },
     { href: "/resources", label: "Supportive Services" },
     { href: "/bf-dc", label: "BF-DC" },
+    { href: "/express-interest", label: "Express Interest" },
   ];
 
   return (
@@ -87,13 +88,6 @@ export default function Header() {
                   {logoutMutation.isPending ? "Logging out..." : "Logout"}
                 </Button>
               </>
-            )}
-            {!isAuthenticated && (
-              <Link href="/express-interest">
-                <Button variant="outline" size="sm" className="text-base h-auto py-2 px-4 border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground" data-testid="button-express-interest">
-                  Express Interest
-                </Button>
-              </Link>
             )}
           </div>
 
@@ -145,19 +139,6 @@ export default function Header() {
                     {logoutMutation.isPending ? "Logging out..." : "Logout"}
                   </Button>
                 </>
-              )}
-              {!isAuthenticated && (
-                <Link href="/express-interest">
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    className="w-full mt-2 text-sm border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground"
-                    onClick={() => setMobileMenuOpen(false)}
-                    data-testid="mobile-button-express-interest"
-                  >
-                    Express Interest
-                  </Button>
-                </Link>
               )}
             </nav>
           </div>
