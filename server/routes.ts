@@ -15,9 +15,15 @@ export async function registerRoutes(app: Express): Promise<Server> {
       req.session.username = username;
       req.session.login_time = new Date().toISOString();
       
-      logToCSV(username, 'Login', 'User logged in');
-      
-      res.json({ success: true, username });
+      req.session.save((err) => {
+        if (err) {
+          res.status(500).json({ success: false, message: 'Session save failed' });
+          return;
+        }
+        
+        logToCSV(username, 'Login', 'User logged in');
+        res.json({ success: true, username });
+      });
     } else {
       res.status(401).json({ success: false, message: 'Access Denied' });
     }
