@@ -20,8 +20,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
           return;
         }
         
-        await storage.logActivity({ username, page: 'Login', details: 'User logged in' });
-        res.json({ success: true, username });
+        try {
+          await storage.logActivity({ username, page: 'Login', details: 'User logged in' });
+          res.json({ success: true, username });
+        } catch (error) {
+          console.error('Failed to log activity:', error);
+          res.status(500).json({ success: false, message: 'Failed to log activity' });
+        }
       });
     } else {
       res.status(401).json({ success: false, message: 'Access Denied' });
@@ -45,7 +50,11 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     const durationString = `${hours}h ${minutes}m ${seconds}s`;
     
-    await storage.logActivity({ username, page: 'Logout', details: `Total session duration: ${durationString}` });
+    try {
+      await storage.logActivity({ username, page: 'Logout', details: `Total session duration: ${durationString}` });
+    } catch (error) {
+      console.error('Failed to log logout activity:', error);
+    }
 
     req.session.destroy((err) => {
       if (err) {
@@ -81,8 +90,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
 
     const { page, details } = result.data;
-    await storage.logActivity({ username: req.session.username, page, details });
-    res.json({ success: true });
+    try {
+      await storage.logActivity({ username: req.session.username, page, details });
+      res.json({ success: true });
+    } catch (error) {
+      console.error('Failed to log activity:', error);
+      res.status(500).json({ success: false, message: 'Failed to log activity' });
+    }
   });
 
   const httpServer = createServer(app);

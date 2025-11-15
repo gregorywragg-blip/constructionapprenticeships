@@ -6,6 +6,7 @@ This web application helps individuals in the DC and Maryland area find union co
 
 ## Recent Changes (November 15, 2025)
 
+- **Database Migration for Activity Logging**: Converted activity logging from CSV files to PostgreSQL database storage to ensure persistence across production deployments (Replit's ephemeral file system was causing logs to be lost on republish)
 - **Production Login Fix**: Added `app.set('trust proxy', 1)` configuration to enable secure session cookies behind Replit's HTTPS proxy in production
 - **Express Interest**: Restored to main navigation menu (visible to all users regardless of auth status)
 - **Career Quiz Fix**: Implemented intelligent matching algorithm that scores all 14 apprenticeship programs based on quiz answers (environment preference, hands-on style, heights comfort, interests, precision work) and returns personalized top 4 recommendations with detailed explanations
@@ -32,11 +33,15 @@ Key pages include: Home, Raising the Bar, Programs, Quiz, Support Services, Reso
 
 ### Backend Architecture
 
-The backend utilizes Node.js with Express.js. Vite handles frontend bundling, while esbuild is used for server-side bundling. An abstract `IStorage` interface is defined for data storage, currently implemented with in-memory storage but designed for future PostgreSQL integration via Drizzle ORM.
+The backend utilizes Node.js with Express.js. Vite handles frontend bundling, while esbuild is used for server-side bundling. An abstract `IStorage` interface is defined for data storage, implemented with `DatabaseStorage` class using PostgreSQL via Drizzle ORM.
 
 ### Data Storage Solutions
 
 Drizzle ORM (v0.39.1) with Zod schema validation is configured for PostgreSQL using the `@neondatabase/serverless` driver. Shared schema types ensure type-safe database queries. A migration strategy using `drizzle-kit` is in place for schema synchronization.
+
+**Database Schema:**
+- `activity_logs` table: Stores user activity (login, logout, page visits) with UUID primary key, timestamp, username, page, and details fields
+- Migration command: `npm run db:push` (applies schema changes to database)
 
 ### Authentication and Authorization
 
@@ -44,14 +49,14 @@ Session-based authentication is implemented using Express sessions with an in-me
 
 ### Activity Logging
 
-User activity is logged to a local `activity_log.csv` file using a custom `csvLogger` utility. An API endpoint (`POST /api/log-activity`) receives activity data from the frontend, requiring authentication and validating requests with Zod. A `usePageLogger` hook automatically logs page visits for authenticated users.
+User activity is logged to the PostgreSQL database (`activity_logs` table) ensuring persistence across production deployments. An API endpoint (`POST /api/log-activity`) receives activity data from the frontend, requiring authentication and validating requests with Zod. A `usePageLogger` hook automatically logs page visits for authenticated users.
 
 **Logged Events:**
 - **Login**: User login with timestamp
 - **Page Visits**: Automatic logging when visiting `/`, `/page1`, and `/page2`
 - **Logout**: Session termination with calculated total session duration (formatted as "Xh Ym Zs")
 
-The logout endpoint (`POST /api/logout`) calculates the elapsed time from `login_time` (stored in session) to logout time, formats it as a human-readable duration string, and logs it to CSV before destroying the session.
+The logout endpoint (`POST /api/logout`) calculates the elapsed time from `login_time` (stored in session) to logout time, formats it as a human-readable duration string, and logs it to the database. Error handling: Login and page visit logging failures return 500 errors; logout logging failures are logged to console but still allow the user to log out (prioritizing user intent over activity tracking).
 
 ## External Dependencies
 
