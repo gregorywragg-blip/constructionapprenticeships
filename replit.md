@@ -39,6 +39,13 @@ Session-based authentication is implemented using Express sessions with an in-me
 
 User activity is logged to a local `activity_log.csv` file using a custom `csvLogger` utility. An API endpoint (`POST /api/log-activity`) receives activity data from the frontend, requiring authentication and validating requests with Zod. A `usePageLogger` hook automatically logs page visits for authenticated users.
 
+**Logged Events:**
+- **Login**: User login with timestamp
+- **Page Visits**: Automatic logging when visiting `/`, `/page1`, and `/page2`
+- **Logout**: Session termination with calculated total session duration (formatted as "Xh Ym Zs")
+
+The logout endpoint (`POST /api/logout`) calculates the elapsed time from `login_time` (stored in session) to logout time, formats it as a human-readable duration string, and logs it to CSV before destroying the session.
+
 ## External Dependencies
 
 **UI Component Libraries**:
