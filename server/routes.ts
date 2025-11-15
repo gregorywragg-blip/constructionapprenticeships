@@ -24,6 +24,24 @@ export async function registerRoutes(app: Express): Promise<Server> {
   });
 
   app.post('/api/logout', (req: Request, res: Response) => {
+    if (!req.session.username || !req.session.login_time) {
+      res.status(401).json({ success: false, message: 'Not authenticated' });
+      return;
+    }
+
+    const username = req.session.username;
+    const loginTime = new Date(req.session.login_time);
+    const logoutTime = new Date();
+    const durationMs = logoutTime.getTime() - loginTime.getTime();
+    
+    const hours = Math.floor(durationMs / (1000 * 60 * 60));
+    const minutes = Math.floor((durationMs % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((durationMs % (1000 * 60)) / 1000);
+    
+    const durationString = `${hours}h ${minutes}m ${seconds}s`;
+    
+    logToCSV(username, 'Logout', `Total session duration: ${durationString}`);
+
     req.session.destroy((err) => {
       if (err) {
         res.status(500).json({ success: false, message: 'Logout failed' });
