@@ -6,6 +6,7 @@ This web application helps individuals in the DC and Maryland area find union co
 
 ## Recent Changes (November 15, 2025)
 
+- **Activity Logs Page (CTW Login)**: Created new "My Activity" page at /ctw_login where authenticated users can view their personal login, logout, and page visit history from the database. The page displays activity in a table format with timestamps, page names, and session duration details. Navigation link only visible to authenticated users for security.
 - **Database Migration for Activity Logging**: Converted activity logging from CSV files to PostgreSQL database storage to ensure persistence across production deployments (Replit's ephemeral file system was causing logs to be lost on republish)
 - **Production Login Fix**: Added `app.set('trust proxy', 1)` configuration to enable secure session cookies behind Replit's HTTPS proxy in production
 - **Express Interest**: Restored to main navigation menu (visible to all users regardless of auth status)
@@ -29,7 +30,7 @@ Preferred communication style: Simple, everyday language.
 
 The frontend is built with React 18+ (TypeScript, functional components, hooks) using Wouter for client-side routing. State management combines React Query for server state and local component state for UI. The UI is constructed with Shadcn/ui components (based on Radix UI) and styled using Tailwind CSS with custom design tokens for a burgundy color scheme and consistent typography (Roboto font family).
 
-Key pages include: Home, Raising the Bar, Programs, Quiz, Support Services, Resources & Guides, MC3, Math, BF-DC, and Express Interest.
+Key pages include: Home, Raising the Bar, Programs, Quiz, Support Services, Resources & Guides, MC3, Math, BF-DC, Express Interest, and My Activity (CTW Login).
 
 ### Backend Architecture
 
@@ -57,6 +58,12 @@ User activity is logged to the PostgreSQL database (`activity_logs` table) ensur
 - **Logout**: Session termination with calculated total session duration (formatted as "Xh Ym Zs")
 
 The logout endpoint (`POST /api/logout`) calculates the elapsed time from `login_time` (stored in session) to logout time, formats it as a human-readable duration string, and logs it to the database. Error handling: Login and page visit logging failures return 500 errors; logout logging failures are logged to console but still allow the user to log out (prioritizing user intent over activity tracking).
+
+**Viewing Activity Logs:**
+- Authenticated users can view their personal activity history at `/ctw_login` (labeled "My Activity" in navigation)
+- API endpoint `GET /api/activity-logs` returns only the current user's logs (filtered by username for security)
+- Logs displayed in a table format showing timestamp, username, page/action, and details
+- Navigation link only visible to authenticated users
 
 ## External Dependencies
 
