@@ -24,6 +24,10 @@ export default function ResourcesGuides() {
       description: "Essential guides to help you understand career opportunities in the construction trades",
       resources: [
         {
+          title: "Baltimore-DC Metro Apprenticeship Guidebook",
+          url: "https://ctwi.org/wp-content/uploads/BDC-Construct-Your-Future-Brochure-2023w-2.pdf"
+        },
+        {
           title: "MC3 Student Guide",
           url: "https://tradesfutures.org/wp-content/uploads/2025/06/Careers-in-the-Construction-Trades-Students-Guide-June-2025.pdf"
         },
@@ -38,6 +42,10 @@ export default function ResourcesGuides() {
       icon: <Users className="w-8 h-8" />,
       description: "Resources to help families understand and support apprenticeship career paths",
       resources: [
+        {
+          title: "Baltimore-DC Metro Apprenticeship Guidebook",
+          url: "https://ctwi.org/wp-content/uploads/BDC-Construct-Your-Future-Brochure-2023w-2.pdf"
+        },
         {
           title: "MC3 Parent Guide",
           url: "https://tradesfutures.org/wp-content/uploads/2025/06/Careers-in-the-Construction-Trades-Parents-Guide-June-2025.pdf"
