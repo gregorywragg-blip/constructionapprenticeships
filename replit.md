@@ -9,6 +9,7 @@ This web application helps individuals in the DC and Maryland area find union co
 - **Production Login Fix**: Added `app.set('trust proxy', 1)` configuration to enable secure session cookies behind Replit's HTTPS proxy in production
 - **Express Interest**: Restored to main navigation menu (visible to all users regardless of auth status)
 - **Career Quiz Fix**: Implemented intelligent matching algorithm that scores all 14 apprenticeship programs based on quiz answers (environment preference, hands-on style, heights comfort, interests, precision work) and returns personalized top 4 recommendations with detailed explanations
+- **Quiz Navigation Fix**: Added onClick handlers to "View All Programs" and "View Program Details" buttons so they properly navigate to the programs page instead of restarting the quiz
 
 ## User Preferences
 

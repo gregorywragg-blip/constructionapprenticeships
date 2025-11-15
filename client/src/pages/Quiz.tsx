@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useLocation } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import QuizQuestion from "@/components/QuizQuestion";
@@ -56,6 +57,7 @@ const quizQuestions = [
 ];
 
 export default function Quiz() {
+  const [, setLocation] = useLocation();
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<Record<number, string>>({});
   const [isComplete, setIsComplete] = useState(false);
@@ -389,7 +391,11 @@ export default function Quiz() {
                     <CardDescription className="text-base">{rec.reason}</CardDescription>
                   </CardHeader>
                   <CardContent>
-                    <Button variant="default" data-testid={`button-view-program-${index}`}>
+                    <Button 
+                      variant="default" 
+                      onClick={() => setLocation("/programs")}
+                      data-testid={`button-view-program-${index}`}
+                    >
                       View Program Details
                     </Button>
                   </CardContent>
@@ -401,7 +407,11 @@ export default function Quiz() {
               <Button variant="outline" onClick={handleReset} data-testid="button-retake-quiz">
                 Retake Quiz
               </Button>
-              <Button variant="default" data-testid="button-view-all-programs">
+              <Button 
+                variant="default" 
+                onClick={() => setLocation("/programs")}
+                data-testid="button-view-all-programs"
+              >
                 View All Programs
               </Button>
             </div>
