@@ -14,6 +14,7 @@ import Math from "@/pages/Math";
 import RaisingTheBar from "@/pages/RaisingTheBar";
 import ExpressInterest from "@/pages/ExpressInterest";
 import BFDC from "@/pages/BFDC";
+import CtwLogin from "@/pages/CtwLogin";
 import Login from "@/pages/Login";
 import Page1 from "@/pages/Page1";
 import Page2 from "@/pages/Page2";
@@ -32,6 +33,7 @@ function Router() {
       <Route path="/raising-the-bar" component={RaisingTheBar} />
       <Route path="/express-interest" component={ExpressInterest} />
       <Route path="/bf-dc" component={BFDC} />
+      <Route path="/ctw_login" component={CtwLogin} />
       <Route path="/page1" component={Page1} />
       <Route path="/page2" component={Page2} />
       <Route component={NotFound} />
