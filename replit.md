@@ -4,6 +4,12 @@
 
 This web application helps individuals in the DC and Maryland area find union construction apprenticeship opportunities and support services. It functions as a comprehensive resource hub featuring an apprenticeship program directory, an AI-powered career matching quiz, directories for social services, educational resources, a math practice center, and information on pre-apprenticeship programs. The platform aims to be accessible, clear, and credible for users seeking career paths in construction trades.
 
+## Recent Changes (November 15, 2025)
+
+- **Production Login Fix**: Added `app.set('trust proxy', 1)` configuration to enable secure session cookies behind Replit's HTTPS proxy in production
+- **Express Interest**: Restored to main navigation menu (visible to all users regardless of auth status)
+- **Career Quiz Fix**: Implemented intelligent matching algorithm that scores all 14 apprenticeship programs based on quiz answers (environment preference, hands-on style, heights comfort, interests, precision work) and returns personalized top 4 recommendations with detailed explanations
+
 ## User Preferences
 
 Preferred communication style: Simple, everyday language.

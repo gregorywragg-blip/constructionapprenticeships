@@ -84,11 +84,281 @@ export default function Quiz() {
     setIsComplete(false);
   };
 
-  const recommendations = [
-    { trade: "Electrical (IBEW Local 26)", match: "95%", reason: "Your attention to detail and interest in technical systems makes you an excellent candidate for electrical work." },
-    { trade: "Carpentry (UBC)", match: "88%", reason: "Your hands-on skills and interest in building structures align well with carpentry." },
-    { trade: "Operating Engineers (IUOE Local 77)", match: "82%", reason: "Your preference for working with tools and machinery is a great fit for operating engineers." },
-  ];
+  const calculateRecommendations = () => {
+    const programs = [
+      {
+        id: "1",
+        name: "Boilermakers",
+        traits: {
+          environment: ["indoor", "both"],
+          handsOn: ["love-it", "prefer-tools"],
+          heights: ["yes", "some", "willing"],
+          interests: ["technical", "variety"],
+          precision: ["good", "excel"]
+        }
+      },
+      {
+        id: "2",
+        name: "Bricklayers & Allied Craftworkers",
+        traits: {
+          environment: ["outdoor", "both"],
+          handsOn: ["love-it", "like-it"],
+          heights: ["no", "some"],
+          interests: ["building", "teamwork"],
+          precision: ["excel", "good"]
+        }
+      },
+      {
+        id: "3",
+        name: "United Brotherhood of Carpenters",
+        traits: {
+          environment: ["indoor", "both"],
+          handsOn: ["love-it", "like-it"],
+          heights: ["some", "yes", "willing"],
+          interests: ["building", "variety"],
+          precision: ["excel", "good"]
+        }
+      },
+      {
+        id: "4",
+        name: "Cement Masons & Plasterers",
+        traits: {
+          environment: ["outdoor", "both"],
+          handsOn: ["love-it", "like-it"],
+          heights: ["no", "some"],
+          interests: ["building", "teamwork"],
+          precision: ["excel", "good"]
+        }
+      },
+      {
+        id: "5",
+        name: "IBEW Local 24 - Electrical Workers",
+        traits: {
+          environment: ["indoor", "both"],
+          handsOn: ["like-it", "prefer-tools"],
+          heights: ["some", "yes", "willing"],
+          interests: ["technical", "variety"],
+          precision: ["excel", "good"]
+        }
+      },
+      {
+        id: "6",
+        name: "Elevator Constructors",
+        traits: {
+          environment: ["indoor"],
+          handsOn: ["prefer-tools", "like-it"],
+          heights: ["yes", "willing"],
+          interests: ["technical", "variety"],
+          precision: ["excel", "good"]
+        }
+      },
+      {
+        id: "7",
+        name: "Heat & Frost Insulators",
+        traits: {
+          environment: ["indoor", "both"],
+          handsOn: ["love-it", "like-it"],
+          heights: ["yes", "some", "willing"],
+          interests: ["technical", "teamwork"],
+          precision: ["good", "okay"]
+        }
+      },
+      {
+        id: "8",
+        name: "Ironworkers",
+        traits: {
+          environment: ["outdoor", "both"],
+          handsOn: ["love-it", "prefer-tools"],
+          heights: ["yes", "willing"],
+          interests: ["building", "variety"],
+          precision: ["good", "okay"]
+        }
+      },
+      {
+        id: "9",
+        name: "LIUNA - Construction Laborers",
+        traits: {
+          environment: ["outdoor", "both", "indoor"],
+          handsOn: ["love-it", "like-it", "prefer-physical"],
+          heights: ["no", "some", "yes", "willing"],
+          interests: ["teamwork", "variety"],
+          precision: ["okay", "prefer-physical"]
+        }
+      },
+      {
+        id: "10",
+        name: "Operating Engineers",
+        traits: {
+          environment: ["outdoor", "both"],
+          handsOn: ["prefer-tools", "like-it"],
+          heights: ["yes", "some", "willing"],
+          interests: ["technical", "variety"],
+          precision: ["good", "excel"]
+        }
+      },
+      {
+        id: "11",
+        name: "Painters & Allied Trades",
+        traits: {
+          environment: ["indoor", "both"],
+          handsOn: ["like-it", "love-it"],
+          heights: ["some", "yes", "willing"],
+          interests: ["variety", "teamwork"],
+          precision: ["excel", "good"]
+        }
+      },
+      {
+        id: "12",
+        name: "United Association - Plumbers, Pipefitters, Steamfitters & Sprinklerfitters",
+        traits: {
+          environment: ["indoor", "both"],
+          handsOn: ["prefer-tools", "like-it"],
+          heights: ["some", "no"],
+          interests: ["technical", "variety"],
+          precision: ["excel", "good"]
+        }
+      },
+      {
+        id: "13",
+        name: "Roofers",
+        traits: {
+          environment: ["outdoor"],
+          handsOn: ["love-it", "like-it"],
+          heights: ["yes", "willing"],
+          interests: ["building", "teamwork"],
+          precision: ["good", "okay"]
+        }
+      },
+      {
+        id: "14",
+        name: "SMART - Sheet Metal Workers",
+        traits: {
+          environment: ["indoor", "both"],
+          handsOn: ["prefer-tools", "like-it"],
+          heights: ["some", "yes", "willing"],
+          interests: ["technical", "building"],
+          precision: ["excel", "good"]
+        }
+      }
+    ];
+
+    const scored = programs.map(program => {
+      let score = 0;
+      let maxScore = 0;
+
+      // Question 0: Work environment
+      maxScore += 20;
+      if (answers[0] && program.traits.environment.includes(answers[0])) {
+        score += 20;
+      } else if (answers[0] === "no-preference") {
+        score += 15;
+      }
+
+      // Question 1: Hands-on work
+      maxScore += 20;
+      if (answers[1] && program.traits.handsOn.includes(answers[1])) {
+        score += 20;
+      }
+
+      // Question 2: Heights
+      maxScore += 20;
+      if (answers[2] && program.traits.heights.includes(answers[2])) {
+        score += 20;
+      }
+
+      // Question 3: Interests
+      maxScore += 20;
+      if (answers[3] && program.traits.interests.includes(answers[3])) {
+        score += 20;
+      }
+
+      // Question 4: Precision
+      maxScore += 20;
+      if (answers[4] && program.traits.precision.includes(answers[4])) {
+        score += 20;
+      }
+
+      const percentage = Math.round((score / maxScore) * 100);
+      return { ...program, score, percentage };
+    });
+
+    // Sort by score and get top 4
+    const topMatches = scored
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 4);
+
+    // Generate reasons based on answers
+    return topMatches.map(match => {
+      const reasons = [];
+      
+      // Environment preferences
+      if (answers[0] === "indoor" && match.traits.environment.includes("indoor")) {
+        reasons.push("works well with your preference for indoor environments");
+      } else if (answers[0] === "outdoor" && match.traits.environment.includes("outdoor")) {
+        reasons.push("matches your outdoor work preference");
+      } else if (answers[0] === "both" && match.traits.environment.includes("both")) {
+        reasons.push("offers the variety of indoor and outdoor work you're looking for");
+      } else if (answers[0] === "no-preference" && match.traits.environment.length > 0) {
+        reasons.push("provides flexible work environments");
+      }
+
+      // Hands-on work style
+      if (answers[1] === "love-it" && match.traits.handsOn.includes("love-it")) {
+        reasons.push("perfect for your love of hands-on, physical work");
+      } else if (answers[1] === "like-it" && match.traits.handsOn.includes("like-it")) {
+        reasons.push("offers good hands-on work with variety");
+      } else if (answers[1] === "prefer-tools" && match.traits.handsOn.includes("prefer-tools")) {
+        reasons.push("aligns with your preference for working with tools and machinery");
+      } else if (answers[1] === "okay" && match.traits.handsOn.includes("like-it")) {
+        reasons.push("balances hands-on work with other tasks");
+      }
+
+      // Heights comfort
+      if (answers[2] === "yes" && match.traits.heights.includes("yes")) {
+        reasons.push("takes advantage of your comfort with heights");
+      } else if (answers[2] === "no" && match.traits.heights.includes("no")) {
+        reasons.push("keeps you safely on the ground as you prefer");
+      } else if (answers[2] === "some" && match.traits.heights.includes("some")) {
+        reasons.push("involves manageable heights you're comfortable with");
+      } else if (answers[2] === "willing" && match.traits.heights.includes("willing")) {
+        reasons.push("provides training to help you gain confidence with heights");
+      }
+
+      // Interest areas
+      if (answers[3] === "technical" && match.traits.interests.includes("technical")) {
+        reasons.push("matches your interest in technical systems and problem-solving");
+      } else if (answers[3] === "building" && match.traits.interests.includes("building")) {
+        reasons.push("aligns with your passion for building and creating structures");
+      } else if (answers[3] === "teamwork" && match.traits.interests.includes("teamwork")) {
+        reasons.push("offers the team collaboration you're looking for");
+      } else if (answers[3] === "variety" && match.traits.interests.includes("variety")) {
+        reasons.push("provides the variety and new challenges you enjoy");
+      }
+
+      // Precision work
+      if (answers[4] === "excel" && match.traits.precision.includes("excel")) {
+        reasons.push("values your attention to detail and precision");
+      } else if (answers[4] === "good" && match.traits.precision.includes("good")) {
+        reasons.push("requires good precision skills when needed");
+      } else if (answers[4] === "okay" && match.traits.precision.includes("okay")) {
+        reasons.push("balances precision work with broader tasks");
+      } else if (answers[4] === "prefer-physical" && match.traits.precision.includes("prefer-physical")) {
+        reasons.push("focuses on physical work over detailed precision");
+      }
+
+      const reason = reasons.length > 0 
+        ? `This trade ${reasons.slice(0, 2).join(" and ")}.`
+        : "This trade is a great fit based on your overall profile.";
+
+      return {
+        trade: match.name,
+        match: `${match.percentage}%`,
+        reason
+      };
+    });
+  };
+
+  const recommendations = isComplete ? calculateRecommendations() : [];
 
   if (isComplete) {
     return (
