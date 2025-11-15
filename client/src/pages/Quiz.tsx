@@ -392,6 +392,7 @@ export default function Quiz() {
                   </CardHeader>
                   <CardContent>
                     <Button 
+                      type="button"
                       variant="default" 
                       onClick={() => setLocation("/programs")}
                       data-testid={`button-view-program-${index}`}
@@ -404,10 +405,16 @@ export default function Quiz() {
             </div>
 
             <div className="flex gap-4 justify-center">
-              <Button variant="outline" onClick={handleReset} data-testid="button-retake-quiz">
+              <Button 
+                type="button"
+                variant="outline" 
+                onClick={handleReset} 
+                data-testid="button-retake-quiz"
+              >
                 Retake Quiz
               </Button>
               <Button 
+                type="button"
                 variant="default" 
                 onClick={() => setLocation("/programs")}
                 data-testid="button-view-all-programs"
