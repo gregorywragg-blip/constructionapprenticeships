@@ -1,5 +1,6 @@
-import { type User, type InsertUser, type ActivityLog, type InsertActivityLog } from "@shared/schema";
-import { randomUUID } from "crypto";
+import { users, activityLogs, type User, type InsertUser, type ActivityLog, type InsertActivityLog } from "@shared/schema";
+import { db } from "./db";
+import { eq, desc } from "drizzle-orm";
 
 // modify the interface with any CRUD methods
 // you might need
@@ -12,51 +13,41 @@ export interface IStorage {
   getActivityLogs(limit?: number): Promise<ActivityLog[]>;
 }
 
-export class MemStorage implements IStorage {
-  private users: Map<string, User>;
-  private activityLogs: ActivityLog[];
-
-  constructor() {
-    this.users = new Map();
-    this.activityLogs = [];
-  }
-
+export class DatabaseStorage implements IStorage {
   async getUser(id: string): Promise<User | undefined> {
-    return this.users.get(id);
+    const [user] = await db.select().from(users).where(eq(users.id, id));
+    return user || undefined;
   }
 
   async getUserByUsername(username: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.username === username,
-    );
+    const [user] = await db.select().from(users).where(eq(users.username, username));
+    return user || undefined;
   }
 
   async createUser(insertUser: InsertUser): Promise<User> {
-    const id = randomUUID();
-    const user: User = { ...insertUser, id };
-    this.users.set(id, user);
+    const [user] = await db
+      .insert(users)
+      .values(insertUser)
+      .returning();
     return user;
   }
 
   async logActivity(insertLog: InsertActivityLog): Promise<ActivityLog> {
-    const id = randomUUID();
-    const timestamp = new Date();
-    const log: ActivityLog = { 
-      id, 
-      timestamp, 
-      username: insertLog.username,
-      page: insertLog.page,
-      details: insertLog.details
-    };
-    this.activityLogs.push(log);
+    const [log] = await db
+      .insert(activityLogs)
+      .values(insertLog)
+      .returning();
     return log;
   }
 
   async getActivityLogs(limit: number = 1000): Promise<ActivityLog[]> {
-    return this.activityLogs
-      .sort((a, b) => b.timestamp.getTime() - a.timestamp.getTime())
-      .slice(0, limit);
+    const logs = await db
+      .select()
+      .from(activityLogs)
+      .orderBy(desc(activityLogs.timestamp))
+      .limit(limit);
+    return logs;
   }
 }
 
-export const storage = new MemStorage();
+export const storage = new DatabaseStorage();
