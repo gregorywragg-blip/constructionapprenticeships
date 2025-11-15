@@ -1,27 +1,26 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
-import { logToCSV } from "./utils/csvLogger";
 import { logActivitySchema } from "@shared/schema";
 
 const VALID_USERS = ['beli', 'jamie', 'wallace', 'megan', 'sandra', 'gwragg'];
 const VALID_PASSWORD = 'hiregreg';
 
 export async function registerRoutes(app: Express): Promise<Server> {
-  app.post('/api/login', (req: Request, res: Response) => {
+  app.post('/api/login', async (req: Request, res: Response) => {
     const { username, password } = req.body;
 
     if (VALID_USERS.includes(username) && password === VALID_PASSWORD) {
       req.session.username = username;
       req.session.login_time = new Date().toISOString();
       
-      req.session.save((err) => {
+      req.session.save(async (err) => {
         if (err) {
           res.status(500).json({ success: false, message: 'Session save failed' });
           return;
         }
         
-        logToCSV(username, 'Login', 'User logged in');
+        await storage.logActivity({ username, page: 'Login', details: 'User logged in' });
         res.json({ success: true, username });
       });
     } else {
@@ -29,7 +28,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post('/api/logout', (req: Request, res: Response) => {
+  app.post('/api/logout', async (req: Request, res: Response) => {
     if (!req.session.username || !req.session.login_time) {
       res.status(401).json({ success: false, message: 'Not authenticated' });
       return;
@@ -46,7 +45,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     
     const durationString = `${hours}h ${minutes}m ${seconds}s`;
     
-    logToCSV(username, 'Logout', `Total session duration: ${durationString}`);
+    await storage.logActivity({ username, page: 'Logout', details: `Total session duration: ${durationString}` });
 
     req.session.destroy((err) => {
       if (err) {
@@ -69,7 +68,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  app.post('/api/log-activity', (req: Request, res: Response) => {
+  app.post('/api/log-activity', async (req: Request, res: Response) => {
     if (!req.session.username) {
       res.status(401).json({ success: false, message: 'Not authenticated' });
       return;
@@ -82,7 +81,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
 
     const { page, details } = result.data;
-    logToCSV(req.session.username, page, details);
+    await storage.logActivity({ username: req.session.username, page, details });
     res.json({ success: true });
   });
 
