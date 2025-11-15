@@ -39,13 +39,13 @@ export default function Login() {
       }
       return response;
     },
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['/api/check-auth'] });
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey: ['/api/check-auth'] });
+      await queryClient.refetchQueries({ queryKey: ['/api/check-auth'] });
       toast({
         title: "Login successful",
         description: "Welcome back!",
       });
-      window.location.reload();
     },
     onError: (error: Error) => {
       setError(error.message);
