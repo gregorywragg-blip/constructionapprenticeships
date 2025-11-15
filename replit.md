@@ -110,12 +110,87 @@ Preferred communication style: Simple, everyday language.
 
 ### Authentication and Authorization
 
-**Current State**: Basic user schema defined but authentication not yet implemented
+**Implementation Date**: November 15, 2025
 
-**Planned Approach**: 
-- Session-based authentication likely (indicated by `connect-pg-simple` for PostgreSQL session store)
-- User model includes username and password fields
-- **Consideration**: Cookie-based sessions for simplicity; could migrate to JWT for stateless architecture if needed
+**Backend (server/index.ts, server/routes.ts):**
+- Session-based authentication using Express sessions with in-memory store (`memorystore`)
+- Session configuration:
+  - Cookie name: `connect.sid`
+  - Session secret: Environment variable `SESSION_SECRET` (default in development)
+  - Cookie settings: httpOnly, secure (in production), sameSite: 'lax', maxAge: 24 hours
+  - Resave: false, saveUninitialized: false
+- Authentication endpoints:
+  - `POST /api/login`: Accepts {username, password}, validates credentials, creates session
+  - `POST /api/logout`: Destroys session
+  - `GET /api/check-auth`: Returns {authenticated, username, login_time}
+- Valid credentials:
+  - Usernames: beli, jamie, wallace, megan, sandra
+  - Password: hiregreg (same for all users)
+  - **Note**: Hardcoded credentials for demo; production should use database with hashed passwords
+
+**Frontend Architecture:**
+
+**Centralized Auth Context** (`client/src/contexts/AuthContext.tsx`):
+- Single source of truth for authentication state across the entire application
+- Wraps the entire app with `AuthProvider` in `App.tsx`
+- Uses React Query to fetch auth status from `/api/check-auth`
+- Exposes `useAuth()` hook for components to access auth state
+- Prevents stale cache vulnerabilities by treating refetches as loading state
+- Status derivation: `'loading' | 'authenticated' | 'unauthenticated' | 'error'`
+- **Critical Security Feature**: Checks both `isLoading` (initial) and `isFetching` (refetch) to prevent stale authenticated state during session validation
+- Refetches on:
+  - Component mount (`refetchOnMount: 'always'`)
+  - Window focus (`refetchOnWindowFocus: true`)
+  - Zero staleTime ensures fresh auth checks
+
+**App-Level Protection** (`client/src/App.tsx`):
+- `AuthenticatedApp` component gates all routes based on auth status
+- Conditional rendering:
+  - `status === 'loading'`: Loading spinner
+  - `status === 'error'`: Error message
+  - `status === 'unauthenticated'`: Login page
+  - `status === 'authenticated'`: Full router with all pages
+- **Result**: Protected routes only mount when authentication is confirmed
+
+**Page-Level Protection** (`Page1.tsx`, `Page2.tsx`):
+- Double-layer protection (app-level + page-level)
+- Use `useAuth()` to check status
+- Redirect to home if not authenticated
+- Return null during loading or when unauthenticated
+- Ensures protected content never flashes to unauthenticated users
+
+**Header Integration** (`client/src/components/Header.tsx`):
+- Uses `useAuth()` to display username and logout button
+- Shows "Welcome, {username}!" when authenticated
+- Shows "Express Interest" button when unauthenticated
+- No duplicate auth queries (shares AuthContext state)
+
+**Login Page** (`client/src/pages/Login.tsx`):
+- Form with username and password fields
+- Validates credentials via `POST /api/login`
+- Uses React Hook Form with Zod validation
+- Invalidates auth cache on successful login
+- Redirects to home after login (which shows full app)
+
+**Security Guarantees:**
+- ✅ No stale cache window - `isFetching` blocks rendering during refetches
+- ✅ No duplicate queries - centralized auth state in `AuthContext`
+- ✅ No race conditions - single status source of truth
+- ✅ Protected routes only render when `status === 'authenticated'`
+- ✅ Session expiry detected automatically via window focus refetch
+- ✅ Multi-layer protection (app + page level)
+- ✅ Error handling for failed auth checks
+
+**Protected Routes:**
+- `/page1`: Protected Page 1 (example)
+- `/page2`: Protected Page 2 (example)
+- Future protected pages can use the same pattern
+
+**Migration Path**:
+- Current: In-memory session store (development)
+- Future: PostgreSQL session store using `connect-pg-simple` (production)
+- Current: Hardcoded credentials
+- Future: Database-backed user model with bcrypt password hashing
 
 ### External Dependencies
 
