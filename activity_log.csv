@@ -1,2 +1,6 @@
 timestamp,username,page,details
-2025-11-15T06:42:58.375Z,beli,login,User logged in successfully
+2025-11-15T06:50:03.675Z,gwragg,Login,User logged in
+2025-11-15T06:50:04.063Z,gwragg,/,Visited main site
+2025-11-15T06:50:22.808Z,gwragg,/page1,Visited page 1
+2025-11-15T06:50:43.138Z,gwragg,/,Visited main site
+2025-11-15T06:51:01.473Z,gwragg,/page2,Visited page 2

@@ -1,16 +1,18 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useAuth } from '@/contexts/AuthContext';
 import { apiRequest } from '@/lib/queryClient';
 
 export function usePageLogger(page: string, details: string) {
-  const { isAuthenticated } = useAuth();
+  const { status } = useAuth();
+  const hasLoggedRef = useRef(false);
 
   useEffect(() => {
-    if (isAuthenticated) {
+    if (status === 'authenticated' && !hasLoggedRef.current) {
+      hasLoggedRef.current = true;
       apiRequest('POST', '/api/log-activity', { page, details })
         .catch((error) => {
           console.error('Failed to log page visit:', error);
         });
     }
-  }, [isAuthenticated, page, details]);
+  }, [status, page, details]);
 }

@@ -16,3 +16,10 @@ export const insertUserSchema = createInsertSchema(users).pick({
 
 export type InsertUser = z.infer<typeof insertUserSchema>;
 export type User = typeof users.$inferSelect;
+
+export const logActivitySchema = z.object({
+  page: z.string().min(1),
+  details: z.string().min(1),
+});
+
+export type LogActivity = z.infer<typeof logActivitySchema>;

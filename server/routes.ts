@@ -2,6 +2,7 @@ import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
 import { logToCSV } from "./utils/csvLogger";
+import { logActivitySchema } from "@shared/schema";
 
 const VALID_USERS = ['beli', 'jamie', 'wallace', 'megan', 'sandra', 'gwragg'];
 const VALID_PASSWORD = 'hiregreg';
@@ -50,12 +51,13 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return;
     }
 
-    const { page, details } = req.body;
-    if (!page || !details) {
-      res.status(400).json({ success: false, message: 'Missing page or details' });
+    const result = logActivitySchema.safeParse(req.body);
+    if (!result.success) {
+      res.status(400).json({ success: false, message: 'Invalid request data', errors: result.error.errors });
       return;
     }
 
+    const { page, details } = result.data;
     logToCSV(req.session.username, page, details);
     res.json({ success: true });
   });
