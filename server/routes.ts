@@ -107,7 +107,8 @@ export async function registerRoutes(app: Express): Promise<Server> {
 
     try {
       const logs = await storage.getActivityLogs();
-      res.json(logs);
+      const userLogs = logs.filter(log => log.username === req.session.username);
+      res.json(userLogs);
     } catch (error) {
       console.error('Failed to fetch activity logs:', error);
       res.status(500).json({ success: false, message: 'Failed to fetch activity logs' });

@@ -32,7 +32,7 @@ export default function Header() {
     logoutMutation.mutate();
   };
 
-  const navLinks = [
+  const publicNavLinks = [
     { href: "/programs", label: "Apprenticeships" },
     { href: "/quiz", label: "Career Quiz" },
     { href: "/raising-the-bar", label: "Raising the Bar Program" },
@@ -42,8 +42,15 @@ export default function Header() {
     { href: "/resources", label: "Supportive Services" },
     { href: "/bf-dc", label: "BF-DC" },
     { href: "/express-interest", label: "Express Interest" },
-    { href: "/ctw_login", label: "CTW Login" },
   ];
+
+  const authenticatedNavLinks = [
+    { href: "/ctw_login", label: "My Activity" },
+  ];
+
+  const navLinks = isAuthenticated 
+    ? [...publicNavLinks, ...authenticatedNavLinks]
+    : publicNavLinks;
 
   return (
     <header className="sticky top-0 z-50 bg-primary border-b border-primary-foreground/10">

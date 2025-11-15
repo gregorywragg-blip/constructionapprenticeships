@@ -27,18 +27,18 @@ export default function CtwLogin() {
           <div className="mb-8">
             <div className="flex items-center gap-3 mb-2">
               <ClipboardList className="h-8 w-8 text-primary" />
-              <h1 className="text-4xl font-bold">Activity Logs</h1>
+              <h1 className="text-4xl font-bold">My Activity Logs</h1>
             </div>
             <p className="text-xl text-muted-foreground">
-              View login, logout, and page visit activity
+              View your login, logout, and page visit activity
             </p>
           </div>
 
           <Card>
             <CardHeader>
-              <CardTitle>User Activity</CardTitle>
+              <CardTitle>My Activity</CardTitle>
               <CardDescription>
-                Recent activity logs showing logins, logouts, and page visits
+                Your recent activity logs showing logins, logouts, and page visits
               </CardDescription>
             </CardHeader>
             <CardContent>
