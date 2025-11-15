@@ -1,12 +1,36 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, LogOut, User } from "lucide-react";
+import { useMutation } from "@tanstack/react-query";
+import { apiRequest, queryClient } from "@/lib/queryClient";
+import { useToast } from "@/hooks/use-toast";
+import { useAuth } from "@/contexts/AuthContext";
 import ctwLogoUrl from "@assets/CTWI-logo_1763155720403.png";
 
 export default function Header() {
   const [location] = useLocation();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { toast } = useToast();
+  const { auth, isAuthenticated } = useAuth();
+
+  const logoutMutation = useMutation({
+    mutationFn: async () => {
+      await apiRequest("POST", "/api/logout", {});
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['/api/check-auth'] });
+      toast({
+        title: "Logged out",
+        description: "You have been successfully logged out.",
+      });
+      window.location.reload();
+    },
+  });
+
+  const handleLogout = () => {
+    logoutMutation.mutate();
+  };
 
   const navLinks = [
     { href: "/programs", label: "Apprenticeships" },
@@ -44,12 +68,33 @@ export default function Header() {
             ))}
           </nav>
 
-          <div className="hidden lg:block flex-shrink-0">
-            <Link href="/express-interest">
-              <Button variant="outline" size="sm" className="text-base h-auto py-2 px-4 border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground" data-testid="button-express-interest">
-                Express Interest
-              </Button>
-            </Link>
+          <div className="hidden lg:flex items-center gap-3 flex-shrink-0">
+            {isAuthenticated && (
+              <>
+                <div className="flex items-center gap-2 text-primary-foreground text-sm">
+                  <User className="h-4 w-4" />
+                  <span data-testid="text-username">Welcome, {auth?.username}!</span>
+                </div>
+                <Button 
+                  variant="outline" 
+                  size="sm" 
+                  onClick={handleLogout}
+                  disabled={logoutMutation.isPending}
+                  className="text-base h-auto py-2 px-4 border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground" 
+                  data-testid="button-logout"
+                >
+                  <LogOut className="h-4 w-4 mr-2" />
+                  {logoutMutation.isPending ? "Logging out..." : "Logout"}
+                </Button>
+              </>
+            )}
+            {!isAuthenticated && (
+              <Link href="/express-interest">
+                <Button variant="outline" size="sm" className="text-base h-auto py-2 px-4 border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground" data-testid="button-express-interest">
+                  Express Interest
+                </Button>
+              </Link>
+            )}
           </div>
 
           <Button
@@ -79,17 +124,41 @@ export default function Header() {
                   </Button>
                 </Link>
               ))}
-              <Link href="/express-interest">
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="w-full mt-2 text-sm border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground"
-                  onClick={() => setMobileMenuOpen(false)}
-                  data-testid="mobile-button-express-interest"
-                >
-                  Express Interest
-                </Button>
-              </Link>
+              {isAuthenticated && (
+                <>
+                  <div className="flex items-center gap-2 text-primary-foreground text-sm px-3 py-2 mt-2 bg-primary-foreground/5 rounded-md">
+                    <User className="h-4 w-4" />
+                    <span data-testid="mobile-text-username">Welcome, {auth?.username}!</span>
+                  </div>
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    onClick={() => {
+                      handleLogout();
+                      setMobileMenuOpen(false);
+                    }}
+                    disabled={logoutMutation.isPending}
+                    className="w-full mt-2 text-sm border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground"
+                    data-testid="mobile-button-logout"
+                  >
+                    <LogOut className="h-4 w-4 mr-2" />
+                    {logoutMutation.isPending ? "Logging out..." : "Logout"}
+                  </Button>
+                </>
+              )}
+              {!isAuthenticated && (
+                <Link href="/express-interest">
+                  <Button
+                    variant="outline"
+                    size="sm"
+                    className="w-full mt-2 text-sm border-primary-foreground !text-primary-foreground hover:bg-primary-foreground/10 hover:!text-primary-foreground"
+                    onClick={() => setMobileMenuOpen(false)}
+                    data-testid="mobile-button-express-interest"
+                  >
+                    Express Interest
+                  </Button>
+                </Link>
+              )}
             </nav>
           </div>
         )}

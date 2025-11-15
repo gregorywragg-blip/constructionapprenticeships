@@ -4,10 +4,12 @@ import Footer from "@/components/Footer";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "wouter";
-import { GraduationCap, Users, Calculator, HeartHandshake, Building2, TrendingUp } from "lucide-react";
+import { GraduationCap, Users, Calculator, HeartHandshake, Building2, TrendingUp, FileText, Shield } from "lucide-react";
+import { useAuth } from "@/contexts/AuthContext";
 import mc3Image from "@assets/generated_images/MC3_training_classroom_session_b1a684c4.png";
 
 export default function Home() {
+  const { auth, isAuthenticated } = useAuth();
   const features = [
     {
       icon: Building2,
@@ -53,6 +55,39 @@ export default function Home() {
       <Hero />
 
       <main className="flex-1">
+        {isAuthenticated && (
+          <section className="py-8 bg-muted/30 border-b">
+            <div className="max-w-7xl mx-auto px-6">
+              <Card>
+                <CardHeader>
+                  <CardTitle className="text-2xl">
+                    Welcome, {auth?.username}!
+                  </CardTitle>
+                  <CardDescription>
+                    You're now logged in to the DC/MD Union Trades Pathway portal
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="flex flex-wrap gap-3">
+                    <Link href="/page1">
+                      <Button variant="default" data-testid="link-page1-home">
+                        <FileText className="h-4 w-4 mr-2" />
+                        Page 1
+                      </Button>
+                    </Link>
+                    <Link href="/page2">
+                      <Button variant="default" data-testid="link-page2-home">
+                        <Shield className="h-4 w-4 mr-2" />
+                        Page 2
+                      </Button>
+                    </Link>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+          </section>
+        )}
+
         <section className="py-16 bg-background">
           <div className="max-w-7xl mx-auto px-6">
             <div className="text-center mb-12">
