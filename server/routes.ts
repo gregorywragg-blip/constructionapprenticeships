@@ -99,6 +99,21 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
+  app.get('/api/activity-logs', async (req: Request, res: Response) => {
+    if (!req.session.username) {
+      res.status(401).json({ success: false, message: 'Not authenticated' });
+      return;
+    }
+
+    try {
+      const logs = await storage.getActivityLogs();
+      res.json(logs);
+    } catch (error) {
+      console.error('Failed to fetch activity logs:', error);
+      res.status(500).json({ success: false, message: 'Failed to fetch activity logs' });
+    }
+  });
+
   const httpServer = createServer(app);
 
   return httpServer;
