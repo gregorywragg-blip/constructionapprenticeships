@@ -1,6 +1,7 @@
 import type { Express, Request, Response } from "express";
 import { createServer, type Server } from "http";
 import { storage } from "./storage";
+import { logToCSV } from "./utils/csvLogger";
 
 const VALID_USERS = ['beli', 'jamie', 'wallace', 'megan', 'sandra'];
 const VALID_PASSWORD = 'hiregreg';
@@ -12,6 +13,9 @@ export async function registerRoutes(app: Express): Promise<Server> {
     if (VALID_USERS.includes(username) && password === VALID_PASSWORD) {
       req.session.username = username;
       req.session.login_time = new Date().toISOString();
+      
+      logToCSV(username, 'login', 'User logged in successfully');
+      
       res.json({ success: true, username });
     } else {
       res.status(401).json({ success: false, message: 'Access Denied' });
