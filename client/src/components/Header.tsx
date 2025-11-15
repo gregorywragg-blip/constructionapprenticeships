@@ -45,7 +45,7 @@ export default function Header() {
   ];
 
   const authenticatedNavLinks = [
-    { href: "/ctw_login", label: "My Activity" },
+    ...(auth?.username === 'gwragg' ? [{ href: "/ctw_login", label: "My Activity" }] : []),
   ];
 
   const navLinks = isAuthenticated 

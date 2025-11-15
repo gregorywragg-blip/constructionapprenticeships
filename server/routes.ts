@@ -105,10 +105,14 @@ export async function registerRoutes(app: Express): Promise<Server> {
       return;
     }
 
+    if (req.session.username !== 'gwragg') {
+      res.status(403).json({ success: false, message: 'Unauthorized access' });
+      return;
+    }
+
     try {
       const logs = await storage.getActivityLogs();
-      const userLogs = logs.filter(log => log.username === req.session.username);
-      res.json(userLogs);
+      res.json(logs);
     } catch (error) {
       console.error('Failed to fetch activity logs:', error);
       res.status(500).json({ success: false, message: 'Failed to fetch activity logs' });
