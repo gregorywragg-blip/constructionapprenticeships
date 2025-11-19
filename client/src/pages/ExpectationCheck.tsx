@@ -1,10 +1,37 @@
+import { useState } from "react";
 import { Link } from "wouter";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import { CheckCircle2, XCircle, AlertTriangle } from "lucide-react";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+
+type SoftSkillResponses = {
+  reliability: boolean | null;
+  commitment: boolean | null;
+  listening: boolean | null;
+  communication: boolean | null;
+  adaptability: boolean | null;
+  safety: boolean | null;
+};
 
 export default function ExpectationCheck() {
+  const [responses, setResponses] = useState<SoftSkillResponses>({
+    reliability: null,
+    commitment: null,
+    listening: null,
+    communication: null,
+    adaptability: null,
+    safety: null,
+  });
+
+  const handleResponseChange = (skill: keyof SoftSkillResponses, value: boolean) => {
+    setResponses(prev => ({ ...prev, [skill]: value }));
+  };
+
+  const hasAnyNo = Object.values(responses).some(response => response === false);
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
@@ -17,6 +44,20 @@ export default function ExpectationCheck() {
               Understanding the expectations and standards required for apprenticeship success
             </p>
           </div>
+
+          {/* Disclaimer Alert */}
+          {hasAnyNo && (
+            <Alert variant="destructive" className="mb-8" data-testid="alert-disclaimer">
+              <AlertTriangle className="h-4 w-4" />
+              <AlertTitle>Important: These Skills Are Mandatory for Success</AlertTitle>
+              <AlertDescription>
+                The skills and behaviors outlined below are essential requirements for all union apprenticeships. 
+                If you answered "No" to any of these assessments, we strongly encourage you to work on developing 
+                these critical skills before applying. Please return when you are fully prepared to meet these 
+                expectations, as they are fundamental to your success and safety in the construction trades.
+              </AlertDescription>
+            </Alert>
+          )}
 
           {/* Section 1: Soft Skills Checklist */}
           <Card className="mb-8">
@@ -37,9 +78,29 @@ export default function ExpectationCheck() {
                 <p className="mb-3 text-sm">
                   You must be on site and ready to work 10-15 minutes BEFORE your scheduled start time. This includes having your PPE (Personal Protective Equipment) on. "On time" means early. Absence or tardiness without prior notification is grounds for immediate dismissal.
                 </p>
-                <p className="text-sm font-medium text-muted-foreground italic">
-                  Self-Assessment: I have reliable transportation and can arrive early every day. (Yes/No)
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold">Self-Assessment: I have reliable transportation and can arrive early every day.</p>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="reliability-yes" 
+                        checked={responses.reliability === true}
+                        onCheckedChange={() => handleResponseChange('reliability', true)}
+                        data-testid="checkbox-reliability-yes"
+                      />
+                      <label htmlFor="reliability-yes" className="text-sm cursor-pointer">Yes</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="reliability-no" 
+                        checked={responses.reliability === false}
+                        onCheckedChange={() => handleResponseChange('reliability', false)}
+                        data-testid="checkbox-reliability-no"
+                      />
+                      <label htmlFor="reliability-no" className="text-sm cursor-pointer">No</label>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Commitment & Initiative */}
@@ -48,9 +109,29 @@ export default function ExpectationCheck() {
                 <p className="mb-3 text-sm">
                   You actively seek out work and keep busy. If you finish a task, you ask your Journeyman, "What's next?" You view every day as a step toward becoming a Journeyworker, not just a paycheck.
                 </p>
-                <p className="text-sm font-medium text-muted-foreground italic">
-                  Self-Assessment: I am willing to put in a full day's hard work, regardless of weather or task. (Yes/No)
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold">Self-Assessment: I am willing to put in a full day's hard work, regardless of weather or task.</p>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="commitment-yes" 
+                        checked={responses.commitment === true}
+                        onCheckedChange={() => handleResponseChange('commitment', true)}
+                        data-testid="checkbox-commitment-yes"
+                      />
+                      <label htmlFor="commitment-yes" className="text-sm cursor-pointer">Yes</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="commitment-no" 
+                        checked={responses.commitment === false}
+                        onCheckedChange={() => handleResponseChange('commitment', false)}
+                        data-testid="checkbox-commitment-no"
+                      />
+                      <label htmlFor="commitment-no" className="text-sm cursor-pointer">No</label>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Active Listening */}
@@ -59,9 +140,29 @@ export default function ExpectationCheck() {
                 <p className="mb-3 text-sm">
                   You listen to instructions completely before beginning a task. You repeat back instructions to ensure accuracy and ask clarifying questions like, "Just to confirm, you want the 2x4s cut at 45 degrees, correct?"
                 </p>
-                <p className="text-sm font-medium text-muted-foreground italic">
-                  Self-Assessment: I can focus fully on instructions and take notes if needed. (Yes/No)
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold">Self-Assessment: I can focus fully on instructions and take notes if needed.</p>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="listening-yes" 
+                        checked={responses.listening === true}
+                        onCheckedChange={() => handleResponseChange('listening', true)}
+                        data-testid="checkbox-listening-yes"
+                      />
+                      <label htmlFor="listening-yes" className="text-sm cursor-pointer">Yes</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="listening-no" 
+                        checked={responses.listening === false}
+                        onCheckedChange={() => handleResponseChange('listening', false)}
+                        data-testid="checkbox-listening-no"
+                      />
+                      <label htmlFor="listening-no" className="text-sm cursor-pointer">No</label>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Professional Communication */}
@@ -70,9 +171,29 @@ export default function ExpectationCheck() {
                 <p className="mb-3 text-sm">
                   You speak with respect to all Journeymen, supervisors, and co-workers. You never engage in profanity, bullying, or inappropriate jokes. You address and resolve conflicts professionally and privately.
                 </p>
-                <p className="text-sm font-medium text-muted-foreground italic">
-                  Self-Assessment: I can manage disagreements calmly and maintain a positive attitude under stress. (Yes/No)
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold">Self-Assessment: I can manage disagreements calmly and maintain a positive attitude under stress.</p>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="communication-yes" 
+                        checked={responses.communication === true}
+                        onCheckedChange={() => handleResponseChange('communication', true)}
+                        data-testid="checkbox-communication-yes"
+                      />
+                      <label htmlFor="communication-yes" className="text-sm cursor-pointer">Yes</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="communication-no" 
+                        checked={responses.communication === false}
+                        onCheckedChange={() => handleResponseChange('communication', false)}
+                        data-testid="checkbox-communication-no"
+                      />
+                      <label htmlFor="communication-no" className="text-sm cursor-pointer">No</label>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Adaptability & Attitude */}
@@ -81,9 +202,29 @@ export default function ExpectationCheck() {
                 <p className="mb-3 text-sm">
                   You must be open to all tasks assigned, even mundane ones. You are receptive to constructive criticism and use it to improve, rather than getting defensive. You accept a new assignment with a positive, "No problem" attitude.
                 </p>
-                <p className="text-sm font-medium text-muted-foreground italic">
-                  Self-Assessment: I am prepared to accept feedback and new tasks without complaint. (Yes/No)
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold">Self-Assessment: I am prepared to accept feedback and new tasks without complaint.</p>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="adaptability-yes" 
+                        checked={responses.adaptability === true}
+                        onCheckedChange={() => handleResponseChange('adaptability', true)}
+                        data-testid="checkbox-adaptability-yes"
+                      />
+                      <label htmlFor="adaptability-yes" className="text-sm cursor-pointer">Yes</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="adaptability-no" 
+                        checked={responses.adaptability === false}
+                        onCheckedChange={() => handleResponseChange('adaptability', false)}
+                        data-testid="checkbox-adaptability-no"
+                      />
+                      <label htmlFor="adaptability-no" className="text-sm cursor-pointer">No</label>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Safety Consciousness */}
@@ -92,9 +233,29 @@ export default function ExpectationCheck() {
                 <p className="mb-3 text-sm">
                   You prioritize safety over speed. You wear all required PPE (hard hat, safety glasses, boots, etc.) at all times. You are aware of your surroundings and speak up immediately if you see an unsafe condition.
                 </p>
-                <p className="text-sm font-medium text-muted-foreground italic">
-                  Self-Assessment: I am committed to following all safety rules 100% of the time. (Yes/No)
-                </p>
+                <div className="space-y-2">
+                  <p className="text-sm font-semibold">Self-Assessment: I am committed to following all safety rules 100% of the time.</p>
+                  <div className="flex gap-4">
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="safety-yes" 
+                        checked={responses.safety === true}
+                        onCheckedChange={() => handleResponseChange('safety', true)}
+                        data-testid="checkbox-safety-yes"
+                      />
+                      <label htmlFor="safety-yes" className="text-sm cursor-pointer">Yes</label>
+                    </div>
+                    <div className="flex items-center space-x-2">
+                      <Checkbox 
+                        id="safety-no" 
+                        checked={responses.safety === false}
+                        onCheckedChange={() => handleResponseChange('safety', false)}
+                        data-testid="checkbox-safety-no"
+                      />
+                      <label htmlFor="safety-no" className="text-sm cursor-pointer">No</label>
+                    </div>
+                  </div>
+                </div>
               </div>
             </CardContent>
           </Card>
