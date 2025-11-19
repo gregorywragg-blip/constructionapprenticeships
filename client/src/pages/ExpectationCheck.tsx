@@ -26,8 +26,8 @@ export default function ExpectationCheck() {
     safety: null,
   });
 
-  const handleResponseChange = (skill: keyof SoftSkillResponses, value: boolean) => {
-    setResponses(prev => ({ ...prev, [skill]: value }));
+  const handleResponseChange = (skill: keyof SoftSkillResponses, value: boolean, checked: boolean) => {
+    setResponses(prev => ({ ...prev, [skill]: checked ? value : null }));
   };
 
   const hasAnyNo = Object.values(responses).some(response => response === false);
@@ -85,7 +85,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="reliability-yes" 
                         checked={responses.reliability === true}
-                        onCheckedChange={() => handleResponseChange('reliability', true)}
+                        onCheckedChange={(checked) => handleResponseChange('reliability', true, checked as boolean)}
                         data-testid="checkbox-reliability-yes"
                       />
                       <label htmlFor="reliability-yes" className="text-sm cursor-pointer">Yes</label>
@@ -94,7 +94,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="reliability-no" 
                         checked={responses.reliability === false}
-                        onCheckedChange={() => handleResponseChange('reliability', false)}
+                        onCheckedChange={(checked) => handleResponseChange('reliability', false, checked as boolean)}
                         data-testid="checkbox-reliability-no"
                       />
                       <label htmlFor="reliability-no" className="text-sm cursor-pointer">No</label>
@@ -116,7 +116,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="commitment-yes" 
                         checked={responses.commitment === true}
-                        onCheckedChange={() => handleResponseChange('commitment', true)}
+                        onCheckedChange={(checked) => handleResponseChange('commitment', true, checked as boolean)}
                         data-testid="checkbox-commitment-yes"
                       />
                       <label htmlFor="commitment-yes" className="text-sm cursor-pointer">Yes</label>
@@ -125,7 +125,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="commitment-no" 
                         checked={responses.commitment === false}
-                        onCheckedChange={() => handleResponseChange('commitment', false)}
+                        onCheckedChange={(checked) => handleResponseChange('commitment', false, checked as boolean)}
                         data-testid="checkbox-commitment-no"
                       />
                       <label htmlFor="commitment-no" className="text-sm cursor-pointer">No</label>
@@ -147,7 +147,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="listening-yes" 
                         checked={responses.listening === true}
-                        onCheckedChange={() => handleResponseChange('listening', true)}
+                        onCheckedChange={(checked) => handleResponseChange('listening', true, checked as boolean)}
                         data-testid="checkbox-listening-yes"
                       />
                       <label htmlFor="listening-yes" className="text-sm cursor-pointer">Yes</label>
@@ -156,7 +156,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="listening-no" 
                         checked={responses.listening === false}
-                        onCheckedChange={() => handleResponseChange('listening', false)}
+                        onCheckedChange={(checked) => handleResponseChange('listening', false, checked as boolean)}
                         data-testid="checkbox-listening-no"
                       />
                       <label htmlFor="listening-no" className="text-sm cursor-pointer">No</label>
@@ -178,7 +178,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="communication-yes" 
                         checked={responses.communication === true}
-                        onCheckedChange={() => handleResponseChange('communication', true)}
+                        onCheckedChange={(checked) => handleResponseChange('communication', true, checked as boolean)}
                         data-testid="checkbox-communication-yes"
                       />
                       <label htmlFor="communication-yes" className="text-sm cursor-pointer">Yes</label>
@@ -187,7 +187,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="communication-no" 
                         checked={responses.communication === false}
-                        onCheckedChange={() => handleResponseChange('communication', false)}
+                        onCheckedChange={(checked) => handleResponseChange('communication', false, checked as boolean)}
                         data-testid="checkbox-communication-no"
                       />
                       <label htmlFor="communication-no" className="text-sm cursor-pointer">No</label>
@@ -209,7 +209,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="adaptability-yes" 
                         checked={responses.adaptability === true}
-                        onCheckedChange={() => handleResponseChange('adaptability', true)}
+                        onCheckedChange={(checked) => handleResponseChange('adaptability', true, checked as boolean)}
                         data-testid="checkbox-adaptability-yes"
                       />
                       <label htmlFor="adaptability-yes" className="text-sm cursor-pointer">Yes</label>
@@ -218,7 +218,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="adaptability-no" 
                         checked={responses.adaptability === false}
-                        onCheckedChange={() => handleResponseChange('adaptability', false)}
+                        onCheckedChange={(checked) => handleResponseChange('adaptability', false, checked as boolean)}
                         data-testid="checkbox-adaptability-no"
                       />
                       <label htmlFor="adaptability-no" className="text-sm cursor-pointer">No</label>
@@ -240,7 +240,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="safety-yes" 
                         checked={responses.safety === true}
-                        onCheckedChange={() => handleResponseChange('safety', true)}
+                        onCheckedChange={(checked) => handleResponseChange('safety', true, checked as boolean)}
                         data-testid="checkbox-safety-yes"
                       />
                       <label htmlFor="safety-yes" className="text-sm cursor-pointer">Yes</label>
@@ -249,7 +249,7 @@ export default function ExpectationCheck() {
                       <Checkbox 
                         id="safety-no" 
                         checked={responses.safety === false}
-                        onCheckedChange={() => handleResponseChange('safety', false)}
+                        onCheckedChange={(checked) => handleResponseChange('safety', false, checked as boolean)}
                         data-testid="checkbox-safety-no"
                       />
                       <label htmlFor="safety-no" className="text-sm cursor-pointer">No</label>
