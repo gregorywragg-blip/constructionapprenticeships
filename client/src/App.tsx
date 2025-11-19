@@ -13,6 +13,7 @@ import MC3 from "@/pages/MC3";
 import Math from "@/pages/Math";
 import RaisingTheBar from "@/pages/RaisingTheBar";
 import ExpectationCheck from "@/pages/ExpectationCheck";
+import BehaviorCheck from "@/pages/BehaviorCheck";
 import ExpressInterest from "@/pages/ExpressInterest";
 import BFDC from "@/pages/BFDC";
 import CtwLogin from "@/pages/CtwLogin";
@@ -33,6 +34,7 @@ function Router() {
       <Route path="/math" component={Math} />
       <Route path="/raising-the-bar" component={RaisingTheBar} />
       <Route path="/expectation-check" component={ExpectationCheck} />
+      <Route path="/behavior-check" component={BehaviorCheck} />
       <Route path="/express-interest" component={ExpressInterest} />
       <Route path="/bf-dc" component={BFDC} />
       <Route path="/ctw_login" component={CtwLogin} />
