@@ -54,9 +54,35 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
 }
 
 function AuthenticatedApp() {
+  const { status } = useAuth();
+
+  if (status === 'loading') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto" />
+          <p className="text-muted-foreground">Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === 'error') {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center space-y-4">
+          <p className="text-destructive">Authentication error. Please refresh the page.</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (status === 'unauthenticated') {
+    return <Login />;
+  }
+
   return (
     <Switch>
-      {/* Public Routes */}
       <Route path="/" component={Home} />
       <Route path="/programs" component={Programs} />
       <Route path="/quiz" component={Quiz} />
@@ -69,11 +95,9 @@ function AuthenticatedApp() {
       <Route path="/behavior-check" component={BehaviorCheck} />
       <Route path="/express-interest" component={ExpressInterest} />
       <Route path="/bf-dc" component={BFDC} />
-      
-      {/* Protected Routes */}
-      <Route path="/ctw_login">{() => <ProtectedRoute component={CtwLogin} />}</Route>
-      <Route path="/page1">{() => <ProtectedRoute component={Page1} />}</Route>
-      <Route path="/page2">{() => <ProtectedRoute component={Page2} />}</Route>
+      <Route path="/ctw_login" component={CtwLogin} />
+      <Route path="/page1" component={Page1} />
+      <Route path="/page2" component={Page2} />
       
       <Route component={NotFound} />
     </Switch>
