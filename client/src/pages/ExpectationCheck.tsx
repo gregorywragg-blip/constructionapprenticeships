@@ -45,20 +45,6 @@ export default function ExpectationCheck() {
             </p>
           </div>
 
-          {/* Disclaimer Alert */}
-          {hasAnyNo && (
-            <Alert variant="destructive" className="mb-8" data-testid="alert-disclaimer">
-              <AlertTriangle className="h-4 w-4" />
-              <AlertTitle>Important: These Skills Are Mandatory for Success</AlertTitle>
-              <AlertDescription>
-                The skills and behaviors outlined below are essential requirements for all union apprenticeships. 
-                If you answered "No" to any of these assessments, we strongly encourage you to work on developing 
-                these critical skills before applying. Please return when you are fully prepared to meet these 
-                expectations, as they are fundamental to your success and safety in the construction trades.
-              </AlertDescription>
-            </Alert>
-          )}
-
           {/* Section 1: Soft Skills Checklist */}
           <Card className="mb-8">
             <CardHeader>
@@ -257,6 +243,20 @@ export default function ExpectationCheck() {
                   </div>
                 </div>
               </div>
+
+              {/* Disclaimer Alert - Appears when any "No" is selected */}
+              {hasAnyNo && (
+                <Alert variant="destructive" className="mt-6" data-testid="alert-disclaimer">
+                  <AlertTriangle className="h-4 w-4" />
+                  <AlertTitle>Important: These Skills Are Mandatory for Success</AlertTitle>
+                  <AlertDescription>
+                    The skills and behaviors outlined above are essential requirements for all union apprenticeships. 
+                    If you answered "No" to any of these assessments, we strongly encourage you to work on developing 
+                    these critical skills before applying. Please return when you are fully prepared to meet these 
+                    expectations, as they are fundamental to your success and safety in the construction trades.
+                  </AlertDescription>
+                </Alert>
+              )}
             </CardContent>
           </Card>
 
