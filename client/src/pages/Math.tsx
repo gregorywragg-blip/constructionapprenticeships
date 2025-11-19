@@ -470,6 +470,8 @@ export default function Math() {
   const [completedQuestions, setCompletedQuestions] = useState<Set<string>>(new Set());
   const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set());
   const questionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const prevCompletedCountRef = useRef<number>(0);
+  const lastCompletedQuestionIdRef = useRef<string | null>(null);
 
   const topics = [
     { value: "all", label: "All Topics" },
@@ -483,6 +485,7 @@ export default function Math() {
   ];
 
   const handleQuestionSubmit = (questionId: string, isCorrect: boolean) => {
+    lastCompletedQuestionIdRef.current = questionId;
     setCompletedQuestions(prev => new Set(Array.from(prev).concat(questionId)));
     if (isCorrect) {
       setCorrectAnswers(prev => new Set(Array.from(prev).concat(questionId)));
@@ -496,17 +499,43 @@ export default function Math() {
   const progress = (completedQuestions.size / mathQuestions.length) * 100;
 
   useEffect(() => {
-    const nextUnansweredQuestion = filteredQuestions.find(
-      q => !completedQuestions.has(q.id)
-    );
+    const currentCount = completedQuestions.size;
+    const previousCount = prevCompletedCountRef.current;
     
-    if (nextUnansweredQuestion && questionRefs.current[nextUnansweredQuestion.id]) {
-      setTimeout(() => {
-        questionRefs.current[nextUnansweredQuestion.id]?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'center'
-        });
-      }, 300);
+    if (currentCount > previousCount) {
+      let nextUnansweredQuestion = null;
+      
+      if (lastCompletedQuestionIdRef.current) {
+        const lastCompletedIndex = filteredQuestions.findIndex(
+          q => q.id === lastCompletedQuestionIdRef.current
+        );
+        
+        if (lastCompletedIndex !== -1) {
+          for (let i = lastCompletedIndex + 1; i < filteredQuestions.length; i++) {
+            if (!completedQuestions.has(filteredQuestions[i].id)) {
+              nextUnansweredQuestion = filteredQuestions[i];
+              break;
+            }
+          }
+        }
+      }
+      
+      if (!nextUnansweredQuestion) {
+        nextUnansweredQuestion = filteredQuestions.find(
+          q => !completedQuestions.has(q.id)
+        );
+      }
+      
+      if (nextUnansweredQuestion && questionRefs.current[nextUnansweredQuestion.id]) {
+        setTimeout(() => {
+          questionRefs.current[nextUnansweredQuestion.id]?.scrollIntoView({
+            behavior: 'smooth',
+            block: 'center'
+          });
+        }, 300);
+      }
+      
+      prevCompletedCountRef.current = currentCount;
     }
   }, [completedQuestions, filteredQuestions]);
 
