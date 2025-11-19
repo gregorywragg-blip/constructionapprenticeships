@@ -22,30 +22,7 @@ import Page1 from "@/pages/Page1";
 import Page2 from "@/pages/Page2";
 import NotFound from "@/pages/not-found";
 
-function Router() {
-  return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/programs" component={Programs} />
-      <Route path="/quiz" component={Quiz} />
-      <Route path="/resources" component={Resources} />
-      <Route path="/resources-guides" component={ResourcesGuides} />
-      <Route path="/mc3" component={MC3} />
-      <Route path="/math" component={Math} />
-      <Route path="/raising-the-bar" component={RaisingTheBar} />
-      <Route path="/expectation-check" component={ExpectationCheck} />
-      <Route path="/behavior-check" component={BehaviorCheck} />
-      <Route path="/express-interest" component={ExpressInterest} />
-      <Route path="/bf-dc" component={BFDC} />
-      <Route path="/ctw_login" component={CtwLogin} />
-      <Route path="/page1" component={Page1} />
-      <Route path="/page2" component={Page2} />
-      <Route component={NotFound} />
-    </Switch>
-  );
-}
-
-function AuthenticatedApp() {
+function ProtectedRoute({ component: Component }: { component: React.ComponentType }) {
   const { status } = useAuth();
 
   if (status === 'loading') {
@@ -73,7 +50,34 @@ function AuthenticatedApp() {
     return <Login />;
   }
 
-  return <Router />;
+  return <Component />;
+}
+
+function AuthenticatedApp() {
+  return (
+    <Switch>
+      {/* Public Routes */}
+      <Route path="/" component={Home} />
+      <Route path="/programs" component={Programs} />
+      <Route path="/quiz" component={Quiz} />
+      <Route path="/resources" component={Resources} />
+      <Route path="/resources-guides" component={ResourcesGuides} />
+      <Route path="/mc3" component={MC3} />
+      <Route path="/math" component={Math} />
+      <Route path="/raising-the-bar" component={RaisingTheBar} />
+      <Route path="/expectation-check" component={ExpectationCheck} />
+      <Route path="/behavior-check" component={BehaviorCheck} />
+      <Route path="/express-interest" component={ExpressInterest} />
+      <Route path="/bf-dc" component={BFDC} />
+      
+      {/* Protected Routes */}
+      <Route path="/ctw_login">{() => <ProtectedRoute component={CtwLogin} />}</Route>
+      <Route path="/page1">{() => <ProtectedRoute component={Page1} />}</Route>
+      <Route path="/page2">{() => <ProtectedRoute component={Page2} />}</Route>
+      
+      <Route component={NotFound} />
+    </Switch>
+  );
 }
 
 function App() {

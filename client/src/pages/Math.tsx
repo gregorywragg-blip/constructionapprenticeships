@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
 import MathQuestion from "@/components/MathQuestion";
@@ -469,6 +469,7 @@ export default function Math() {
   const [selectedTopic, setSelectedTopic] = useState<string | null>(null);
   const [completedQuestions, setCompletedQuestions] = useState<Set<string>>(new Set());
   const [correctAnswers, setCorrectAnswers] = useState<Set<string>>(new Set());
+  const questionRefs = useRef<{ [key: string]: HTMLDivElement | null }>({});
 
   const topics = [
     { value: "all", label: "All Topics" },
@@ -493,6 +494,21 @@ export default function Math() {
     : mathQuestions;
 
   const progress = (completedQuestions.size / mathQuestions.length) * 100;
+
+  useEffect(() => {
+    const nextUnansweredQuestion = filteredQuestions.find(
+      q => !completedQuestions.has(q.id)
+    );
+    
+    if (nextUnansweredQuestion && questionRefs.current[nextUnansweredQuestion.id]) {
+      setTimeout(() => {
+        questionRefs.current[nextUnansweredQuestion.id]?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'center'
+        });
+      }, 300);
+    }
+  }, [completedQuestions, filteredQuestions]);
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -567,11 +583,15 @@ export default function Math() {
 
           <div className="space-y-6">
             {filteredQuestions.map(question => (
-              <MathQuestion
-                key={question.id}
-                {...question}
-                onSubmit={(isCorrect) => handleQuestionSubmit(question.id, isCorrect)}
-              />
+              <div 
+                key={question.id} 
+                ref={(el) => { questionRefs.current[question.id] = el; }}
+              >
+                <MathQuestion
+                  {...question}
+                  onSubmit={(isCorrect) => handleQuestionSubmit(question.id, isCorrect)}
+                />
+              </div>
             ))}
           </div>
 
