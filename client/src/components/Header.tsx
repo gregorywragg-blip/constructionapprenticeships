@@ -37,7 +37,7 @@ export default function Header() {
     { href: "/quiz", label: "Career Quiz" },
     { href: "/raising-the-bar", label: "Raising the Bar Program" },
     { href: "/expectation-check", label: "Expectation Check" },
-    { href: "/behavior-check", label: "Behavior Check-Up" },
+    { href: "/behavior-check", label: "Interview Questions" },
     { href: "/mc3", label: "MC3 Info" },
     { href: "/resources-guides", label: "Resources & Guides" },
     { href: "/math", label: "Math Practice" },

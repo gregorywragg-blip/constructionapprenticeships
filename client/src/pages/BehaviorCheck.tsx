@@ -106,7 +106,7 @@ export default function BehaviorCheck() {
       <main className="flex-1 py-12">
         <div className="max-w-5xl mx-auto px-6">
           <div className="mb-8">
-            <h1 className="text-4xl font-bold mb-3" data-testid="heading-behavior-check">Sample Behavioral Interview Questions</h1>
+            <h1 className="text-4xl font-bold mb-3" data-testid="heading-behavior-check">Interview Questions</h1>
             <p className="text-xl text-muted-foreground">
               Practice answering these common apprenticeship interview questions. Compare your responses to the examples provided to understand what employers are looking for.
             </p>
