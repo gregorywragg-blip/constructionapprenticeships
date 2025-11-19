@@ -12,6 +12,7 @@ import ResourcesGuides from "@/pages/ResourcesGuides";
 import MC3 from "@/pages/MC3";
 import Math from "@/pages/Math";
 import RaisingTheBar from "@/pages/RaisingTheBar";
+import ExpectationCheck from "@/pages/ExpectationCheck";
 import ExpressInterest from "@/pages/ExpressInterest";
 import BFDC from "@/pages/BFDC";
 import CtwLogin from "@/pages/CtwLogin";
@@ -31,6 +32,7 @@ function Router() {
       <Route path="/mc3" component={MC3} />
       <Route path="/math" component={Math} />
       <Route path="/raising-the-bar" component={RaisingTheBar} />
+      <Route path="/expectation-check" component={ExpectationCheck} />
       <Route path="/express-interest" component={ExpressInterest} />
       <Route path="/bf-dc" component={BFDC} />
       <Route path="/ctw_login" component={CtwLogin} />
