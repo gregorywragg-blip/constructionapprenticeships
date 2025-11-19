@@ -50,7 +50,7 @@ export default function Resources() {
       id: "drivers-license",
       title: "Obtain Driver's License",
       description: "Workforce programs that pay for driving school and licensing",
-      pdfPath: "/attached_assets/OBTAIN DRIVER'S LICENSE_1763590000738.pdf",
+      pdfPath: "/attached_assets/OBTAIN DRIVER'S LICENSE_1763591855777.pdf",
       icon: IdCard,
     },
     {

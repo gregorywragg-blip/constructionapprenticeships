@@ -1,6 +1,7 @@
 import express, { type Request, Response, NextFunction } from "express";
 import session from "express-session";
 import path from "path";
+import fs from "fs";
 import { registerRoutes } from "./routes";
 import { setupVite, serveStatic, log } from "./vite";
 
@@ -40,6 +41,28 @@ app.use(express.json({
 }));
 app.use(express.urlencoded({ extended: false }));
 
+// Serve attached_assets (PDFs) with explicit route handler BEFORE any other middleware
+// This ensures PDFs are served before Vite's catch-all
+const attachedAssetsPath = path.resolve(import.meta.dirname, '..', 'attached_assets');
+
+app.get('/attached_assets/*', (req, res, next) => {
+  // Decode the URL path to handle special characters (apostrophes, spaces, etc.)
+  const decodedPath = decodeURIComponent(req.path.replace('/attached_assets/', ''));
+  const filePath = path.join(attachedAssetsPath, decodedPath);
+  
+  // Check if file exists and serve it
+  if (fs.existsSync(filePath) && fs.statSync(filePath).isFile()) {
+    res.sendFile(filePath, (err) => {
+      if (err) {
+        next(err);
+      }
+    });
+  } else {
+    // File doesn't exist, pass to next middleware
+    next();
+  }
+});
+
 app.use((req, res, next) => {
   const start = Date.now();
   const path = req.path;
@@ -72,10 +95,6 @@ app.use((req, res, next) => {
 
 (async () => {
   const server = await registerRoutes(app);
-
-  // Serve attached_assets (PDFs and other static files) before error handler
-  const attachedAssetsPath = path.resolve(import.meta.dirname, '..', 'attached_assets');
-  app.use('/attached_assets', express.static(attachedAssetsPath));
 
   app.use((err: any, _req: Request, res: Response, _next: NextFunction) => {
     const status = err.status || err.statusCode || 500;
