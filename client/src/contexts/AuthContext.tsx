@@ -19,30 +19,15 @@ interface AuthContextValue {
 const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
-  const { data: auth, isLoading, isFetching, error } = useQuery<AuthResponse>({
-    queryKey: ['/api/check-auth'],
-    staleTime: 0,
-    refetchOnMount: 'always',
-    refetchOnWindowFocus: true,
-    retry: false,
-  });
-
-  let status: AuthStatus;
-  if (isLoading || isFetching) {
-    status = 'loading';
-  } else if (error) {
-    status = 'error';
-  } else if (auth?.authenticated) {
-    status = 'authenticated';
-  } else {
-    status = 'unauthenticated';
-  }
+  // For static deployment, auto-authenticate
+  const auth: AuthResponse = { authenticated: true, username: 'Guest' };
+  const status: AuthStatus = 'authenticated';
 
   const value: AuthContextValue = {
     auth,
     status,
-    isAuthenticated: status === 'authenticated',
-    isLoading: status === 'loading',
+    isAuthenticated: true,
+    isLoading: false,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
