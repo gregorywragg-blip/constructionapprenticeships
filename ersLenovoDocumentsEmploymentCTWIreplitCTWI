@@ -1,0 +1,130 @@
+[33mb052b2a[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m)[m Initial commit from CTWI project
+[33m72a6a9f[m[33m ([m[1;31mgitsafe-backup/main[m[33m)[m Fix routing to prevent errors and restore preview functionality
+[33mebcbf2d[m Fix routing issues and update project assets for deployment
+[33m8a1dd72[m Adapt website to use hash-based routing for easier deployment
+[33m735c821[m Add construction apprenticeship guidance platform for DC/Maryland
+[33m5a8cb26[m Add static website files for construction apprenticeship program
+[33m28bb2d8[m Remove authentication check for static site deployment
+[33mc1738b9[m Saved progress at the end of the loop
+[33m9c5e6ea[m Saved progress at the end of the loop
+[33m8762960[m Saved progress at the end of the loop
+[33m2ee8e88[m Saved progress at the end of the loop
+[33m2e1376f[m Saved progress at the end of the loop
+[33m72bc508[m Add setup guide for duplicating the construction apprenticeship application
+[33m9eafaf4[m Published your App
+[33m8a1460f[m Update driver's license document and fix PDF display issues
+[33m60dc929[m Published your App
+[33m37eb1c0[m Require login for all website pages
+[33m48373a6[m Published your App
+[33m0ea2056[m Saved progress at the end of the loop
+[33m324de2f[m Redesign supportive services to embed PDFs and add static file serving
+[33m5ec5099[m Add support resources for common barriers to employment
+[33m5458df6[m Published your App
+[33m6bfaa70[m Saved progress at the end of the loop
+[33m460bb49[m Improve math practice scrolling to next unanswered question
+[33mdbc26c6[m Improve math practice progress tracking and fix route access
+[33m1dd8eed[m Update section title to reflect interview questions
+[33m138d6ef[m Published your App
+[33m31fc32f[m Add a Behavior Check-Up page for apprenticeship interview preparation
+[33m54738da[m Add a behavior check-up section to the apprenticeship guidance platform
+[33mb8972b7[m Published your App
+[33m862f267[m Update disclaimer to appear at the bottom of the soft skills section
+[33m54a58e2[m Move disclaimer to appear directly after prospect clicks no
+[33ma9aa5f7[m Published your App
+[33mc63614d[m Add interactive checkboxes to the expectation check page
+[33m873bec9[m Improve user interaction with soft skills checklist by allowing toggling
+[33m4abd5c4[m Add interactive checklist with mandatory skill disclaimers
+[33m4f6f3c3[m Published your App
+[33m2f7e3e4[m Add a new page for expectation checks and improve navigation
+[33m5a2ee7a[m Saved progress at the end of the loop
+[33m8dd7b0a[m Add new page detailing apprentice expectations and linking to other resources
+[33m44144e1[m Add an "Expectation Check" section to the navigation menu
+[33mc102f27[m Add an expectations check page to guide apprentices on mindset and professionalism
+[33m4596bb4[m Published your App
+[33m78dde96[m Restrict activity log viewing to a specific user
+[33ma4cc688[m Restrict access to activity logs to a specific user
+[33m510b7c9[m Add an activity log page for users to view their login history
+[33m78a26be[m Add activity log page for users to view their site interactions
+[33m10d65c0[m Add navigation link for CTW Login page to the header
+[33ma4ca752[m Add an activity log page for user logins
+[33md65d8c3[m Add an activity log page to view user actions and system events
+[33m7386b73[m Add an activity log page for tracking user actions
+[33ma181825[m Saved progress at the end of the loop
+[33m76db08a[m Migrate activity logging from CSV to PostgreSQL for data persistence
+[33m4aaa548[m Update activity logging to use the new database storage system
+[33mdc729ea[m Replace in-memory storage with a PostgreSQL database for logging
+[33m05e7233[m Add activity logging and retrieval to the platform
+[33m909bb3e[m Add database logging system to store user activity records
+[33mec7371a[m Published your App
+[33m48593db[m Add button types to interactive quiz elements for better accessibility
+[33mad669d0[m Published your App
+[33mca8cdc6[m Fix quiz navigation to properly view program details and all results
+[33m2352a45[m Published your App
+[33m8c7a19b[m Improve career quiz to provide personalized apprenticeship recommendations
+[33md5b5164[m Saved progress at the end of the loop
+[33m9068bb6[m Published your App
+[33m1a7cdf8[m Restore Express Interest tab and its embedded form functionality
+[33m8e6a0d2[m Published your App
+[33m027f1b3[m Add logging for user activity and server requests
+[33m267b7c9[m Published your App
+[33mc89a6b9[m Improve user login session handling to prevent potential data loss
+[33meb6f5a9[m Add login activity to the activity log for user beli
+[33mcde029f[m Published your App
+[33m71f20c0[m Improve session handling by adding sameSite attribute
+[33m0f3fd98[m Published your App
+[33mc2342ef[m Saved progress at the end of the loop
+[33mb87d613[m Improve login process by ensuring data is reloaded
+[33m0730abf[m Add new user login activity to the log
+[33maa16e51[m Published your App
+[33m8a81ce7[m Add Baltimore-DC Metro Apprenticeship Guidebook to resources
+[33mf663c27[m Log total user session duration upon logout to CSV file
+[33m8d10ed7[m Log total session duration for users upon logout to CSV
+[33m715f3ba[m Log total session duration when users log out of the platform
+[33mb3a1007[m Update project overview and frontend architecture details
+[33m45b424f[m Add logging for user activity across different pages of the application
+[33m75db8ff[m Add page visit logging to track user navigation across the platform
+[33m69731b9[m Add user Gwragg and log page visits to CSV
+[33m3166bec[m Add activity logging to track user actions in a CSV file
+[33md1841f3[m Add system to automatically log user activities to a CSV file
+[33m89c5fb6[m Add a system to log user activity to a CSV file
+[33m70576fb[m Add email notification capability for user logins
+[33m9506d8f[m Add secure login system for user access to the platform
+[33m6584f26[m Add user login and authentication system to protect application content
+[33ma268b0e[m Published your App
+[33maaaba5a[m Adjust website header layout and increase font sizes for better readability
+[33me833ccb[m Saved progress at the end of the loop
+[33m0ed092a[m Published your App
+[33meb668bd[m Update header to match website's burgundy and white color scheme
+[33m7338f98[m Published your App
+[33mae7f91d[m Update site branding and styling to match CTWI's burgundy color scheme
+[33mc420051[m Adjust header layout and colors to mimic target website design
+[33m14d4e36[m Saved progress at the end of the loop
+[33m8592d42[m Update website title and branding to reflect union trades pathway
+[33m54d6f60[m Update website navigation and branding to reflect union trades pathway
+[33md059dc7[m Update navigation bar and branding elements for improved user experience
+[33m38d6559[m Published your App
+[33m8af0716[m Add resources and guides section for users and partners
+[33mbe945b5[m Add a dedicated section for resources and guides with organized links
+[33m141c8c9[m Published your App
+[33m9a57db1[m Update program application website links for BF-DC programs
+[33m28769e6[m Add section for DC/Maryland construction apprenticeship programs
+[33m6ccc8bf[m Add program data to the BF-DC section of the apprenticeship platform
+[33m6f8bf2e[m Add apprenticeship program data for BF-DC and verify application links
+[33m04b550c[m Update program information with new apprenticeship details
+[33m402e08e[m Published your App
+[33m01ed27c[m Update navigation and add page for users to express interest in programs
+[33m31ecbe7[m Add external website links to apprenticeship program details
+[33ma48412f[m Update apprenticeship program information to reflect accurate numbers and details
+[33ma602f2c[m Saved progress at the end of the loop
+[33ma8ad17e[m Update website branding and add comprehensive community resources Update header to reflect new site name, shorten Raising the Bar program duration, and expand resources to include transportation, childcare, healthcare, and driving schools.
+[33m5df0718[m Published your App
+[33med23feb[m Move Raising the Bar program information to its own homepage
+[33m2125a30[m Remove Rick Astley video from MC3 overview section
+[33mb0dec95[m Add links to relevant sections of the platform from the homepage
+[33mb389931[m Add project overview and system architecture documentation
+[33m359807d[m Saved progress at the end of the loop
+[33m9192119[m Add video links for apprenticeships and a drug testing disclaimer
+[33m1296288[m Saved progress at the end of the loop
+[33me5f6e9e[m Add comprehensive apprenticeship guidance platform with program search and AI matching
+[33me99ec61[m Extracted stack files
+[33mcc02265[m Initial commit
