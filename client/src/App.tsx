@@ -56,6 +56,7 @@ function ProtectedRoute({ component: Component }: { component: React.ComponentTy
 
 function AuthenticatedApp() {
   const { status } = useAuth();
+  const location = useHashLocation();
 
   if (status === 'loading') {
     return (
@@ -83,7 +84,7 @@ function AuthenticatedApp() {
   }
 
   return (
-    <Switch location={useHashLocation()}>
+    <Switch location={location}>
       <Route path="/" component={Home} />
       <Route path="/programs" component={Programs} />
       <Route path="/quiz" component={Quiz} />
